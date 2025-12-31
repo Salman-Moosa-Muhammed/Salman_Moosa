@@ -1,0 +1,105 @@
+# GitHub Actions Workflow for GitHub Pages Deployment
+# Optimized for maximum speed with aggressive caching
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+    - master
+    - main
+    paths:
+    - 'Salman_Moosa/**'
+    - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy from'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+        - main
+        - master
+      clear_cache:
+        description: 'Clear all caches before building'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    # Fast checkout - only fetch what's needed
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event_name == 'workflow_dispatch' && inputs.branch || github.ref }}
+        fetch-depth: 1
+        sparse-checkout: |
+          Salman_Moosa
+        sparse-checkout-cone-mode: false
+
+    # Clear caches if requested via workflow_dispatch
+    - name: Clear caches
+      if: github.event_name == 'workflow_dispatch' && inputs.clear_cache == true
+      run: |
+        echo "Clearing all caches as requested..."
+        rm -rf ~/.bundle vendor/bundle .jekyll-cache .sass-cache
+
+    # Cache Ruby gems for Jekyll
+    - name: Cache Ruby gems
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.bundle
+          vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    # Cache Jekyll build output
+    - name: Cache Jekyll build
+      uses: actions/cache@v4
+      with:
+        path: |
+          .jekyll-cache
+          .sass-cache
+        key: ${{ runner.os }}-jekyll-${{ hashFiles('Salman_Moosa/**') }}
+        restore-keys: |
+          ${{ runner.os }}-jekyll-
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    # Use parallel processing for Jekyll build
+    - name: Build with Jekyll
+      uses: actions/jekyll-build-pages@v1
+      with:
+        source: ./Salman_Moosa
+        destination: ./_site
+      env:
+        JEKYLL_ENV: production
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        retention-days: 1
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
