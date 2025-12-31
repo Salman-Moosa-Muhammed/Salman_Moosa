@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
+      content="width=device-width, initial-scale=1"
     />
     <title>• Salman Moosa •</title>
 
@@ -47,34 +47,41 @@
     />
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
 
-    <meta name="description" content="Software Developer based in India" />
-    <meta property="og:title" content="Salman Moosa • Software Developer" />
+    <meta name="description" content="DevOps Engineer based in India. Building scalable cloud infrastructure with Docker, Kubernetes, AWS, and Terraform." />
+    <meta property="og:title" content="Salman Moosa • DevOps Engineer" />
     <meta
       property="og:description"
-      content="Software Developer based in India"
+      content="DevOps Engineer based in India. Building scalable cloud infrastructure with Docker, Kubernetes, AWS, and Terraform."
     />
     <meta
       property="og:image"
-      content="images/meta-image-salman-moosa-860x540-crop-q72.jpg"
+      content="assets/images/DSC07033.jpg"
     />
     <meta property="og:site_name" content="Salman Moosa" />
     <meta property="og:locale" content="en" />
     <meta property="og:type" content="website" />
     <meta
       property="twitter:title"
-      content="Salman Moosa • Software Developer"
+      content="Salman Moosa • DevOps Engineer"
     />
     <meta
       property="twitter:description"
-      content="Software Developer based in India"
+      content="DevOps Engineer based in India. Building scalable cloud infrastructure with Docker, Kubernetes, AWS, and Terraform."
     />
     <meta
       property="twitter:image"
-      content="images/meta-image-salman-moosa-860x540-crop-q72.jpg"
+      content="assets/images/DSC07033.jpg"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="google" content="notranslate" />
 
+    <link
+      rel="preload"
+      as="font"
+      href="assets/fonts/NeueMontreal-Regular.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
     <link
       rel="preload"
       as="font"
@@ -86,7 +93,8 @@
       /* Font face declaration */
       @font-face {
         font-family: 'Neue Montreal';
-        src: url('assets/fonts/NeueMontreal-Regular.otf') format('opentype');
+        src: url('assets/fonts/NeueMontreal-Regular.woff2') format('woff2'),
+             url('assets/fonts/NeueMontreal-Regular.otf') format('opentype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -97,6 +105,7 @@
   </head>
 
   <body data-barba="wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="no-scroll-overlay"></div>
     <div class="loading-container">
       <div class="loading-screen">
@@ -106,6 +115,9 @@
         <div class="loading-words">
           <h2 class="home-active home-active-first">
             Hello
+            <div class="dot"></div>
+          </h2>
+          <h2 class="home-active home-active-last">
             <div class="dot"></div>
           </h2>
           <h2 class="active">
@@ -151,7 +163,7 @@
       </div>
       <div class="mouse-pos-list-btn no-select"></div>
       <div class="mouse-pos-list-span no-select"><p>View</p></div>
-      <div class="btn btn-hamburger">
+      <div class="btn btn-hamburger" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false" aria-controls="fixed-nav">
         <div
           class="btn-click magnetic"
           data-strength="50"
@@ -159,13 +171,13 @@
         >
           <div class="btn-fill"></div>
           <div class="btn-text">
-            <div class="btn-bars"></div>
+            <div class="btn-bars" aria-hidden="true"></div>
             <span class="btn-text-inner">Menu</span>
           </div>
         </div>
       </div>
       <div class="overlay fixed-nav-back"></div>
-      <div class="fixed-nav theme-dark">
+      <div class="fixed-nav theme-dark" id="fixed-nav" role="dialog" aria-modal="true" aria-label="Site navigation">
         <div class="fixed-nav-rounded-div">
           <div class="rounded-div-wrap">
             <div class="rounded-div"></div>
@@ -185,6 +197,18 @@
                 >
                   <span class="btn-text">
                     <span class="btn-text-inner">Home</span>
+                  </span>
+                </a>
+              </li>
+              <li class="btn btn-link">
+                <a
+                  href="work.html"
+                  class="btn-click magnetic"
+                  data-strength="24"
+                  data-strength-text="12"
+                >
+                  <span class="btn-text">
+                    <span class="btn-text-inner">Work</span>
                   </span>
                 </a>
               </li>
@@ -222,7 +246,7 @@
                 <li class="btn btn-link btn-link-external">
                   <a
                     href="https://www.linkedin.com/in/salman-moosa/"
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                     class="btn-click magnetic"
                     data-strength="20"
                     data-strength-text="10"
@@ -232,12 +256,25 @@
                     </span>
                   </a>
                 </li>
+                <li class="btn btn-link btn-link-external">
+                  <a
+                    href="https://github.com/Salman-Moosa"
+                    target="_blank" rel="noopener noreferrer"
+                    class="btn-click magnetic"
+                    data-strength="20"
+                    data-strength-text="10"
+                  >
+                    <span class="btn-text">
+                      <span class="btn-text-inner">GitHub</span>
+                    </span>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="main-wrap" data-scroll-container="">
+      <div class="main-wrap" id="main-content" data-scroll-container="" tabindex="-1">
         <header class="section home-header theme-dark" data-scroll-section="">
           <div
             class="overlay personal-image no-select once-in"
@@ -245,7 +282,7 @@
             data-scroll-speed="-3"
             data-scroll-position="top"
           >
-            <img src="assets/images/DSC07033.jpg" />
+            <img src="assets/images/DSC07033.jpg" alt="Salman Moosa - DevOps Engineer portrait photo" width="1200" height="1600" loading="lazy" />
           </div>
           <div class="overlay get-height once-in once-in-secondary">
             <div class="hanger">
@@ -325,6 +362,18 @@
               </div>
             </div>
             <ul class="links-wrap">
+              <li class="btn btn-link">
+                <a
+                  href="work.html"
+                  class="btn-click magnetic"
+                  data-strength="20"
+                  data-strength-text="10"
+                >
+                  <span class="btn-text">
+                    <span class="btn-text-inner">Work</span>
+                  </span>
+                </a>
+              </li>
               <li class="btn btn-link">
                 <a
                   href="about.html"
@@ -414,7 +463,7 @@
                     </svg>
                   </div>
                 </div>
-                <h4><span>Software</span> Developer</h4>
+                <h4><span>DevOps</span> Engineer</h4>
               </div>
             </div>
           </div>
@@ -556,19 +605,19 @@
                   </div>
                   <h2>
                     <span>
-                      <div
+                      <img
                         class="profile-picture"
+                        src="assets/images/DSC07033.jpg"
+                        alt="Salman Moosa"
+                        width="80"
+                        height="80"
                         style="
-                          background-image: url('assets/images/profile-picture.png');
-                          background-size: cover;
-                          background-position: center;
-                          width: 80px;
-                          height: 80px;
+                          object-fit: cover;
                           border-radius: 50%;
                           display: inline-block;
                           margin-right: 0px;
                         "
-                      ></div>
+                      />
                       Let's work
                     </span>
                     <span>together</span>
@@ -602,20 +651,6 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="flex-col">
-                  <div class="btn btn-normal">
-                    
-                      </span>
-                    </a>
-                  </div>
-                  <div class="btn btn-normal">
-                    
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="container no-padding">
               <div class="row bottom-footer">
@@ -632,13 +667,26 @@
                       <li class="btn btn-link btn-link-external">
                         <a
                           href="https://www.linkedin.com/in/salman-moosa/"
-                          target="_blank"
+                          target="_blank" rel="noopener noreferrer"
                           class="btn-click magnetic"
                           data-strength="20"
                           data-strength-text="10"
                         >
                           <span class="btn-text">
                             <span class="btn-text-inner">LinkedIn</span>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="btn btn-link btn-link-external">
+                        <a
+                          href="https://github.com/Salman-Moosa"
+                          target="_blank" rel="noopener noreferrer"
+                          class="btn-click magnetic"
+                          data-strength="20"
+                          data-strength-text="10"
+                        >
+                          <span class="btn-text">
+                            <span class="btn-text-inner">GitHub</span>
                           </span>
                         </a>
                       </li>

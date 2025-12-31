@@ -7,12 +7,88 @@ const select = (e) => document.querySelector(e);
 const selectAll = (e) => document.querySelectorAll(e);
 //const container = select('.site-main');
 
+// Check if this is a repeat visit using cookies
+function isRepeatVisit() {
+  return Cookies.get("visited") === "true";
+}
+
+// Mark this as a visited session
+function markAsVisited() {
+  Cookies.set("visited", "true", { expires: 1 }); // Expires in 1 day
+}
+
 initPageTransitions();
+
+// Animation - Quick Loader for repeat visits (0.5s max)
+function initLoaderFast() {
+  var tl = gsap.timeline();
+
+  tl.set(".loading-screen", {
+    top: "0",
+  });
+
+  tl.set(".loading-words", {
+    opacity: 0,
+  });
+
+  if ($(window).width() > 540) {
+    tl.set("main .once-in", {
+      y: "30vh",
+    });
+  } else {
+    tl.set("main .once-in", {
+      y: "10vh",
+    });
+  }
+
+  tl.call(function () {
+    scroll.stop();
+  });
+
+  tl.to(".loading-screen", {
+    duration: 0.3,
+    top: "-100%",
+    ease: "Power4.easeInOut",
+    delay: 0.1,
+  });
+
+  tl.to(
+    "main .once-in",
+    {
+      duration: 0.6,
+      y: "0vh",
+      stagger: 0.03,
+      ease: "Expo.easeOut",
+      clearProps: "true",
+    },
+    "=-.2"
+  );
+
+  tl.set(
+    "html",
+    {
+      cursor: "auto",
+    },
+    "=-0.3"
+  );
+
+  tl.call(function () {
+    scroll.start();
+  });
+
+  markAsVisited();
+}
 
 // Animation - First Page Load
 function initLoaderHome() {
+  // Use fast loader for repeat visitors
+  if (isRepeatVisit()) {
+    return initLoaderFast();
+  }
+
   var tl = gsap.timeline();
 
+  // Initial setup - all synchronous sets
   tl.set(".loading-screen", {
     top: "0",
   });
@@ -39,6 +115,7 @@ function initLoaderHome() {
   tl.set(".loading-words .home-active, .loading-words .home-active-last", {
     display: "block",
     opacity: 0,
+    y: 0,
   });
 
   tl.set(".loading-words .home-active-first", {
@@ -63,62 +140,40 @@ function initLoaderHome() {
     scroll.stop();
   });
 
+  // Fade in the loading words container
   tl.to(".loading-words", {
-    duration: 0.8,
+    duration: 0.6,
     opacity: 1,
     y: -50,
-    ease: "Power4.easeOut",
-    delay: 0.5,
+    ease: "Power3.easeOut",
+    delay: 0.3,
   });
 
+  // Show "Hello" text with a clean fade
   tl.to(
-    ".loading-words .home-active",
+    ".loading-words .home-active-first",
     {
-      duration: 0.01,
+      duration: 0.8,
       opacity: 1,
-      stagger: 0.15,
-      ease: "none",
-      onStart: homeActive,
+      ease: "Power2.easeOut",
     },
-    "=-.4"
+    "-=0.3"
   );
 
-  function homeActive() {
-    const homeActive = document.querySelector(".loading-words .home-active");
-    const homeActiveLast = document.querySelector(
-      ".loading-words .home-active-last"
-    );
-
-    if (homeActive) {
-      gsap.to(homeActive, {
-        duration: 0.5,
-        opacity: 0,
-        y: -20,
-        ease: "power2.inOut",
-      });
-    }
-
-    if (homeActiveLast) {
-      gsap.to(homeActiveLast, {
-        duration: 0.5,
-        opacity: 0,
-        y: -20,
-        ease: "power2.inOut",
-      });
-    }
-  }
-
-  tl.to(".loading-words .home-active-last", {
-    duration: 0.01,
-    opacity: 1,
-    delay: 0.15,
+  // Wait a moment, then fade out "Hello"
+  tl.to(".loading-words .home-active-first", {
+    duration: 0.5,
+    opacity: 0,
+    y: -15,
+    ease: "Power2.easeIn",
+    delay: 0.4,
   });
 
+  // Transition loading screen away
   tl.to(".loading-screen", {
     duration: 0.8,
     top: "-100%",
     ease: "Power4.easeInOut",
-    delay: 0.2,
   });
 
   tl.to(
@@ -128,7 +183,7 @@ function initLoaderHome() {
       height: "0vh",
       ease: "Power4.easeInOut",
     },
-    "=-.8"
+    "<"
   );
 
   tl.to(
@@ -138,7 +193,7 @@ function initLoaderHome() {
       opacity: 0,
       ease: "linear",
     },
-    "=-.8"
+    "<"
   );
 
   tl.set(".loading-screen", {
@@ -149,16 +204,17 @@ function initLoaderHome() {
     height: "0vh",
   });
 
+  // Animate in main content
   tl.to(
     "main .once-in",
     {
-      duration: 1.5,
+      duration: 1.2,
       y: "0vh",
-      stagger: 0.07,
+      stagger: 0.05,
       ease: "Expo.easeOut",
       clearProps: true,
     },
-    "=-.8"
+    "-=0.6"
   );
 
   tl.set(
@@ -166,16 +222,23 @@ function initLoaderHome() {
     {
       cursor: "auto",
     },
-    "=-1.2"
+    "-=0.8"
   );
 
   tl.call(function () {
     scroll.start();
   });
+
+  // Mark as visited after full animation completes
+  markAsVisited();
 }
 
 // Animation - First Page Load
 function initLoader() {
+  // Use fast loader for repeat visitors
+  if (isRepeatVisit()) {
+    return initLoaderFast();
+  }
   var tl = gsap.timeline();
 
   tl.set(".loading-screen", {
@@ -265,6 +328,9 @@ function initLoader() {
     },
     "=-.8"
   );
+
+  // Mark as visited after full animation completes
+  markAsVisited();
 }
 
 // Animation - Page transition In
@@ -642,32 +708,109 @@ function initCheckTouchDevice() {
  * Hamburger Nav Open/Close
  */
 function initHamburgerNav() {
+  // Store the element that triggered the menu open for focus return
+  var lastFocusedElement = null;
+
   // Open/close navigation when clicked .btn-hamburger
+  function openNav(trigger) {
+    lastFocusedElement = trigger || document.activeElement;
+    $(".btn-hamburger, .btn-menu").addClass("active");
+    $(".btn-hamburger")
+      .attr("aria-expanded", "true")
+      .attr("aria-label", "Close navigation menu");
+    $("main").addClass("nav-active");
+    $(".fixed-nav").attr("aria-hidden", "false");
+    scroll.stop();
+
+    // Focus the first link in the nav after opening
+    setTimeout(function () {
+      var firstLink = document.querySelector(".fixed-nav .links-wrap a");
+      if (firstLink) {
+        firstLink.focus();
+      }
+    }, 300);
+  }
+
+  function closeNav() {
+    $(".btn-hamburger, .btn-menu").removeClass("active");
+    $(".btn-hamburger")
+      .attr("aria-expanded", "false")
+      .attr("aria-label", "Open navigation menu");
+    $("main").removeClass("nav-active");
+    $(".fixed-nav").attr("aria-hidden", "true");
+    scroll.start();
+
+    // Return focus to the element that opened the menu
+    if (lastFocusedElement) {
+      setTimeout(function () {
+        lastFocusedElement.focus();
+      }, 100);
+    }
+  }
 
   $(document).ready(function () {
+    // Set initial aria-hidden state
+    $(".fixed-nav").attr("aria-hidden", "true");
+
     $(".btn-hamburger, .btn-menu").click(function () {
       if ($(".btn-hamburger, .btn-menu").hasClass("active")) {
-        $(".btn-hamburger, .btn-menu").removeClass("active");
-        $("main").removeClass("nav-active");
-        scroll.start();
+        closeNav();
       } else {
-        $(".btn-hamburger, .btn-menu").addClass("active");
-        $("main").addClass("nav-active");
-        scroll.stop();
+        openNav(this);
       }
     });
+
+    // Add keyboard support for Enter/Space on hamburger
+    $(".btn-hamburger, .btn-menu").on("keydown", function (e) {
+      if (e.keyCode === 13 || e.keyCode === 32) {
+        // Enter or Space
+        e.preventDefault();
+        if ($(".btn-hamburger, .btn-menu").hasClass("active")) {
+          closeNav();
+        } else {
+          openNav(this);
+        }
+      }
+    });
+
     $(".fixed-nav-back").click(function () {
-      $(".btn-hamburger, .btn-menu").removeClass("active");
-      $("main").removeClass("nav-active");
-      scroll.start();
+      closeNav();
+    });
+
+    // Focus trap within the nav when open
+    $(document).on("keydown", function (e) {
+      if (!$("main").hasClass("nav-active")) return;
+
+      if (e.keyCode === 9) {
+        // Tab key
+        var focusableElements = $(
+          ".fixed-nav a, .fixed-nav button, .btn-hamburger .btn-click"
+        );
+        var firstFocusable = focusableElements.first()[0];
+        var lastFocusable = focusableElements.last()[0];
+
+        if (e.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
+        }
+      }
     });
   });
+
   $(document).keydown(function (e) {
     if (e.keyCode == 27) {
+      // Escape key
       if ($("main").hasClass("nav-active")) {
-        $(".btn-hamburger, .btn-menu").removeClass("active");
-        $("main").removeClass("nav-active");
-        scroll.start();
+        closeNav();
       }
     }
   });
@@ -1187,7 +1330,7 @@ function initTimeZone() {
     const timeSpan = document.querySelector("#timeSpan");
 
     const optionsTime = {
-      timeZone: "Europe/Amsterdam",
+      timeZone: "Asia/Kolkata",
       timeZoneName: "short",
       // year: 'numeric',
       // month: 'numeric',

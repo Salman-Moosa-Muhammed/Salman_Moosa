@@ -23,21 +23,21 @@
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
+      content="width=device-width, initial-scale=1"
     />
     <title>About - Salman Moosa</title>
     <meta
       name="description"
-      content="Helping brands thrive in the digital world. From my office in the Netherlands I help companies with Digital Design, Front-End Development &amp; Interaction."
+      content="DevOps Engineer passionate about cloud infrastructure, CI/CD pipelines, and automation. Building scalable solutions with Docker, Kubernetes, AWS, and Terraform."
     />
     <meta property="og:title" content="About - Salman Moosa" />
     <meta
       property="og:description"
-      content="Helping brands thrive in the digital world. From my office in the Netherlands I help companies with Digital Design, Front-End Development &amp; Interaction."
+      content="DevOps Engineer passionate about cloud infrastructure, CI/CD pipelines, and automation. Building scalable solutions with Docker, Kubernetes, AWS, and Terraform."
     />
     <meta
       property="og:image"
-      content="images/meta-salman-about-860x540-crop-q72.jpg"
+      content="assets/images/DSC07033.jpg"
     />
     <meta property="og:site_name" content="Salman Moosa" />
     <meta property="og:locale" content="en" />
@@ -45,11 +45,11 @@
     <meta property="twitter:title" content="About - Salman Moosa" />
     <meta
       property="twitter:description"
-      content="Helping brands thrive in the digital world. From my office in the Netherlands I help companies with Digital Design, Front-End Development &amp; Interaction."
+      content="DevOps Engineer passionate about cloud infrastructure, CI/CD pipelines, and automation. Building scalable solutions with Docker, Kubernetes, AWS, and Terraform."
     />
     <meta
       property="twitter:image"
-      content="index.html/media/pages/about/d289927735-1646837228/meta-salman-about-860x540-crop-q72.jpg"
+      content="assets/images/DSC07033.jpg"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="google" content="notranslate" />
@@ -77,6 +77,7 @@
   </head>
 
   <body data-barba="wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="no-scroll-overlay"></div>
     <div class="loading-container">
       <div class="loading-screen">
@@ -90,50 +91,6 @@
           </h2>
           <h2>
             Home
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            TWICE
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            The Damai
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            FABRIC™
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Aanstekelijk
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Base Create
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            AVVR
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            GraphicHunters
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Future Goals
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Atypikal
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            One:Nil
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Andy Hardy
             <div class="dot"></div>
           </h2>
           <h2 class="active">
@@ -172,7 +129,7 @@
       data-barba="container"
       data-barba-namespace="about"
     >
-      <div class="btn btn-hamburger">
+      <div class="btn btn-hamburger" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false" aria-controls="fixed-nav">
         <div
           class="btn-click magnetic"
           data-strength="50"
@@ -180,13 +137,13 @@
         >
           <div class="btn-fill"></div>
           <div class="btn-text">
-            <div class="btn-bars"></div>
+            <div class="btn-bars" aria-hidden="true"></div>
             <span class="btn-text-inner">Menu</span>
           </div>
         </div>
       </div>
       <div class="overlay fixed-nav-back"></div>
-      <div class="fixed-nav theme-dark">
+      <div class="fixed-nav theme-dark" id="fixed-nav" role="dialog" aria-modal="true" aria-label="Site navigation">
         <div class="fixed-nav-rounded-div">
           <div class="rounded-div-wrap">
             <div class="rounded-div"></div>
@@ -206,6 +163,18 @@
                 >
                   <span class="btn-text">
                     <span class="btn-text-inner">Home</span>
+                  </span>
+                </a>
+              </li>
+              <li class="btn btn-link">
+                <a
+                  href="work.html"
+                  class="btn-click magnetic"
+                  data-strength="24"
+                  data-strength-text="12"
+                >
+                  <span class="btn-text">
+                    <span class="btn-text-inner">Work</span>
                   </span>
                 </a>
               </li>
@@ -243,7 +212,7 @@
                 <li class="btn btn-link btn-link-external">
                   <a
                     href="https://www.linkedin.com/in/salman-moosa/"
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                     class="btn-click magnetic"
                     data-strength="20"
                     data-strength-text="10"
@@ -253,12 +222,25 @@
                     </span>
                   </a>
                 </li>
+                <li class="btn btn-link btn-link-external">
+                  <a
+                    href="https://github.com/Salman-Moosa"
+                    target="_blank" rel="noopener noreferrer"
+                    class="btn-click magnetic"
+                    data-strength="20"
+                    data-strength-text="10"
+                  >
+                    <span class="btn-text">
+                      <span class="btn-text-inner">GitHub</span>
+                    </span>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="main-wrap" data-scroll-container="">
+      <div class="main-wrap" id="main-content" data-scroll-container="" tabindex="-1">
         <header
           class="section default-header about-header"
           data-scroll-section=""
@@ -286,6 +268,18 @@
               </div>
             </div>
             <ul class="links-wrap">
+              <li class="btn btn-link">
+                <a
+                  href="work.html"
+                  class="btn-click magnetic"
+                  data-strength="20"
+                  data-strength-text="10"
+                >
+                  <span class="btn-text">
+                    <span class="btn-text-inner">Work</span>
+                  </span>
+                </a>
+              </li>
               <li class="btn btn-link active">
                 <a
                   href="about.html"
@@ -327,8 +321,8 @@
             <div class="row">
               <div class="flex-col">
                 <h1>
-                  <span>Helping brands thrive </span
-                  ><span>in the digital world</span>
+                  <span>Building scalable </span
+                  ><span>cloud infrastructure</span>
                 </h1>
               </div>
             </div>
@@ -443,25 +437,23 @@
               <div class="flex-col">
                 <h5>01</h5>
                 <div class="stripe"></div>
-                <h4>Design</h4>
+                <h4>DevOps & Cloud</h4>
                 <p>
-                  Combining my engineering skills with a keen sense for UI/UX
-                  design, I craft intuitive front ends with tools like Figma
-                  Framer and more. My projects emphasize usability, performance,
-                  and visually engaging experiences that put users at the
-                  center.
+                  I specialize in building and maintaining robust CI/CD 
+                  pipelines, container orchestration with Docker and Kubernetes,
+                  and cloud infrastructure on AWS. My focus is on automation,
+                  reliability, and scalability.
                 </p>
               </div>
               <div class="flex-col">
                 <h5>02</h5>
                 <div class="stripe"></div>
-                <h4>Development</h4>
+                <h4>Infrastructure as Code</h4>
                 <p>
-                  I streamline project workflows with efficient DevOps
-                  practices: CI/CD pipelines, Docker, and cloud deployments. My
-                  experience spans automation, version control , and
-                  collaborating in dynamic teams enabling projects to scale
-                  smoothly and reliably.
+                  Using Terraform and modern IaC practices, I design 
+                  infrastructure that's version-controlled, reproducible, and
+                  scalable. From networking to compute resources, everything
+                  is managed as code.
                 </p>
               </div>
               <div class="flex-col">
@@ -502,17 +494,14 @@
                           </g>
                         </g>
                       </g></svg></span
-                  >The full package
+                  >Full Stack DevOps
                 </h4>
                 <p>
-                  From the initial concept to deployment, I deliver robust
-                  software and web solutions that stand out. My blend of strong
-                  design instincts and advanced development expertise allows me
-                  to transform ideas into scalable, user-friendly applications.
-                  With hands-on experience across the full project lifecycle
-                  including UI/UX, development and cloud deployments, I create
-                  end-to-end solutions engineered for performance, reliability,
-                  and real world impact.
+                  From development to deployment and monitoring, I deliver
+                  end-to-end DevOps solutions. Proficient in Java, Python, SQL, 
+                  Bash, and Git, I bridge the gap between development and 
+                  operations to create seamless, automated workflows that 
+                  enable teams to ship faster with confidence.
                 </p>
               </div>
             </div>
@@ -582,7 +571,7 @@
                   </div>
                   <h2>
                     <span
-                      ><div class="profile-picture"></div>
+                      ><img class="profile-picture" src="assets/images/DSC07033.jpg" alt="Salman Moosa" width="80" height="80" />
                       Let's work </span
                     ><span>together</span>
                   </h2>
@@ -632,13 +621,26 @@
                       <li class="btn btn-link btn-link-external">
                         <a
                           href="https://www.linkedin.com/in/salman-moosa/"
-                          target="_blank"
+                          target="_blank" rel="noopener noreferrer"
                           class="btn-click magnetic"
                           data-strength="20"
                           data-strength-text="10"
                         >
                           <span class="btn-text">
                             <span class="btn-text-inner">LinkedIn</span>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="btn btn-link btn-link-external">
+                        <a
+                          href="https://github.com/Salman-Moosa"
+                          target="_blank" rel="noopener noreferrer"
+                          class="btn-click magnetic"
+                          data-strength="20"
+                          data-strength-text="10"
+                        >
+                          <span class="btn-text">
+                            <span class="btn-text-inner">GitHub</span>
                           </span>
                         </a>
                       </li>
@@ -663,50 +665,5 @@
     <script src="js/lazyload.min.js"></script>
     <script src="js/locomotive-scroll.min.js"></script>
     <script defer src="js/index-new.js"></script>
-    <script>
-      // Error handling for various cases
-      window.addEventListener("error", function (e) {
-        // Handle JavaScript errors
-        console.error("Error occurred:", e.error);
-        window.location.href = "/404.html";
-      });
-
-      // Handle 500 errors
-      window.addEventListener("unhandledrejection", function (e) {
-        console.error("Unhandled promise rejection:", e.reason);
-        window.location.href = "/404.html";
-      });
-
-      // Handle network errors
-      window.addEventListener("offline", function () {
-        window.location.href = "/404.html";
-      });
-
-      // Handle broken links
-      document.addEventListener("click", function (e) {
-        if (e.target.tagName === "A") {
-          e.preventDefault();
-          const href = e.target.getAttribute("href");
-
-          // Check if the link is internal
-          if (href && href.startsWith("/")) {
-            fetch(href)
-              .then((response) => {
-                if (!response.ok) {
-                  window.location.href = "/404.html";
-                } else {
-                  window.location.href = href;
-                }
-              })
-              .catch(() => {
-                window.location.href = "/404.html";
-              });
-          } else {
-            // External links open normally
-            window.location.href = href;
-          }
-        }
-      });
-    </script>
   </body>
 </html>

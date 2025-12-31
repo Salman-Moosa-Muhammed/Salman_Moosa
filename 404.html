@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
+      content="width=device-width, initial-scale=1"
     />
     <title>404 - Page Not Found • Salman Moosa</title>
     <meta name="description" content="Page not found - Salman Moosa" />
@@ -50,6 +50,7 @@
   </head>
 
   <body data-barba="wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="no-scroll-overlay"></div>
     <div class="loading-container">
       <div class="loading-screen">
@@ -97,7 +98,7 @@
       data-barba="container"
       data-barba-namespace="error"
     >
-      <div class="btn btn-hamburger">
+      <div class="btn btn-hamburger" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false" aria-controls="fixed-nav">
         <div
           class="btn-click magnetic"
           data-strength="50"
@@ -105,13 +106,13 @@
         >
           <div class="btn-fill"></div>
           <div class="btn-text">
-            <div class="btn-bars"></div>
+            <div class="btn-bars" aria-hidden="true"></div>
             <span class="btn-text-inner">Menu</span>
           </div>
         </div>
       </div>
       <div class="overlay fixed-nav-back"></div>
-      <div class="fixed-nav theme-dark">
+      <div class="fixed-nav theme-dark" id="fixed-nav" role="dialog" aria-modal="true" aria-label="Site navigation">
         <div class="fixed-nav-rounded-div">
           <div class="rounded-div-wrap">
             <div class="rounded-div"></div>
@@ -131,6 +132,18 @@
                 >
                   <span class="btn-text">
                     <span class="btn-text-inner">Home</span>
+                  </span>
+                </a>
+              </li>
+              <li class="btn btn-link">
+                <a
+                  href="work.html"
+                  class="btn-click magnetic"
+                  data-strength="24"
+                  data-strength-text="12"
+                >
+                  <span class="btn-text">
+                    <span class="btn-text-inner">Work</span>
                   </span>
                 </a>
               </li>
@@ -162,7 +175,7 @@
           </div>
         </div>
       </div>
-      <div class="main-wrap" data-scroll-container="">
+      <div class="main-wrap" id="main-content" data-scroll-container="" tabindex="-1">
         <header
           class="section default-header error-header theme-dark"
           data-scroll-section=""
@@ -190,6 +203,18 @@
               </div>
             </div>
             <ul class="links-wrap">
+              <li class="btn btn-link">
+                <a
+                  href="work.html"
+                  class="btn-click magnetic"
+                  data-strength="20"
+                  data-strength-text="10"
+                >
+                  <span class="btn-text">
+                    <span class="btn-text-inner">Work</span>
+                  </span>
+                </a>
+              </li>
               <li class="btn btn-link">
                 <a
                   href="about.html"
@@ -310,19 +335,32 @@
                 </div>
               </div>
               <div class="flex-col">
-                <div class="socials">
+                  <div class="socials">
                   <h5>Socials</h5>
                   <ul>
                     <li class="btn btn-link btn-link-external">
                       <a
                         href="https://www.linkedin.com/in/salman-moosa/"
-                        target="_blank"
+                        target="_blank" rel="noopener noreferrer"
                         class="btn-click magnetic"
                         data-strength="20"
                         data-strength-text="10"
                       >
                         <span class="btn-text">
                           <span class="btn-text-inner">LinkedIn</span>
+                        </span>
+                      </a>
+                    </li>
+                    <li class="btn btn-link btn-link-external">
+                      <a
+                        href="https://github.com/Salman-Moosa"
+                        target="_blank" rel="noopener noreferrer"
+                        class="btn-click magnetic"
+                        data-strength="20"
+                        data-strength-text="10"
+                      >
+                        <span class="btn-text">
+                          <span class="btn-text-inner">GitHub</span>
                         </span>
                       </a>
                     </li>

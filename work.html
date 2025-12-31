@@ -22,39 +22,29 @@
     />
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Work - Salman Moosa</title>
     <meta
       name="description"
-      content="Creating next level digital products. I help companies from all over the world (Netherlands, United States, United Kingdom, Australia, Germany etc.)"
+      content="DevOps and cloud infrastructure projects. Portfolio showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
     />
     <meta property="og:title" content="Work - Salman Moosa" />
     <meta
       property="og:description"
-      content="Creating next level digital products. I help companies from all over the world (Netherlands, United States, United Kingdom, Australia, Germany etc.)"
+      content="DevOps and cloud infrastructure projects. Portfolio showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
     />
-    <meta
-      property="og:image"
-      content="images/meta-image-salman-moosa-860x540-crop-q72.jpg"
-    />
+    <meta property="og:image" content="assets/images/DSC07033.jpg" />
     <meta property="og:site_name" content="Salman Moosa" />
     <meta property="og:locale" content="en" />
     <meta property="og:type" content="website" />
     <meta property="twitter:title" content="Work - Salman Moosa" />
     <meta
       property="twitter:description"
-      content="Creating next level digital products. I help companies from all over the world (Netherlands, United States, United Kingdom, Australia, Germany etc.)"
+      content="DevOps and cloud infrastructure projects. Portfolio showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
     />
-    <meta
-      property="twitter:image"
-      content="index.html/media/site/89d468b455-1646837228/meta-image-salman-moosa-860x540-crop-q72.jpg"
-    />
+    <meta property="twitter:image" content="assets/images/DSC07033.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="google" content="notranslate" />
-    <meta property="og:locale" content="en" />
     <link rel="canonical" href="work.html" />
 
     <link
@@ -70,9 +60,183 @@
     <link href="css/styleguide.css" rel="stylesheet" />
     <link href="css/components.css" rel="stylesheet" />
     <link href="css/style-new.css" rel="stylesheet" />
+    <style>
+      .coming-soon-section {
+        min-height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: var(--section-padding) var(--container-padding);
+      }
+      .coming-soon-content h2 {
+        margin-bottom: 0.5em;
+      }
+      .coming-soon-content p {
+        opacity: 0.6;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75em;
+        margin-top: 2em;
+      }
+      .tech-badge {
+        background: var(--color-lightgray);
+        color: var(--color-dark);
+        padding: 0.5em 1.25em;
+        border-radius: 2em;
+        font-size: 0.9em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5em;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .tech-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .tech-badge svg {
+        width: 1em;
+        height: 1em;
+        flex-shrink: 0;
+      }
+
+      /* Skills Section */
+      .skills-section {
+        padding: calc(var(--section-padding) * 0.75) var(--container-padding);
+        background: var(--color-white);
+      }
+      .skills-section .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .skills-header {
+        text-align: center;
+        margin-bottom: calc(var(--section-padding) * 0.5);
+      }
+      .skills-header h2 {
+        font-size: calc(clamp(2em, 4vw, 3.5em));
+        margin-bottom: 0.25em;
+      }
+      .skills-header p {
+        opacity: 0.6;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2em;
+      }
+      @media screen and (max-width: 768px) {
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .skill-category {
+        background: var(--color-lightgray);
+        border-radius: 1em;
+        padding: 1.5em;
+        transition: transform 0.3s ease;
+      }
+      .skill-category:hover {
+        transform: translateY(-4px);
+      }
+      .skill-category-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75em;
+        margin-bottom: 1em;
+        padding-bottom: 0.75em;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      .skill-category-header svg {
+        width: 1.5em;
+        height: 1.5em;
+        opacity: 0.8;
+      }
+      .skill-category-header h4 {
+        margin: 0;
+        font-size: 1.1em;
+        font-weight: 600;
+      }
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+      }
+      .skill-tag {
+        background: var(--color-white);
+        color: var(--color-dark);
+        padding: 0.4em 0.9em;
+        border-radius: 1.5em;
+        font-size: 0.85em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+      }
+      .skill-tag:hover {
+        border-color: var(--color-dark);
+        transform: scale(1.02);
+      }
+      .skill-tag svg {
+        width: 0.9em;
+        height: 0.9em;
+        flex-shrink: 0;
+        opacity: 0.7;
+      }
+
+      /* Soft Skills Section */
+      .soft-skills-section {
+        padding: calc(var(--section-padding) * 0.5) var(--container-padding);
+        background: var(--color-lightgray);
+      }
+      .soft-skills-header {
+        text-align: center;
+        margin-bottom: 1.5em;
+      }
+      .soft-skills-header h3 {
+        font-size: 1.5em;
+        margin-bottom: 0.25em;
+      }
+      .soft-skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6em;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .soft-skill-badge {
+        background: var(--color-white);
+        color: var(--color-dark);
+        padding: 0.5em 1em;
+        border-radius: 2em;
+        font-size: 0.9em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        transition: all 0.2s ease;
+      }
+      .soft-skill-badge:hover {
+        background: var(--color-dark);
+        color: var(--color-white);
+      }
+      .soft-skill-badge svg {
+        width: 0.9em;
+        height: 0.9em;
+      }
+    </style>
   </head>
 
   <body data-barba="wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="no-scroll-overlay"></div>
     <div class="loading-container">
       <div class="loading-screen">
@@ -84,57 +248,12 @@
             Hello
             <div class="dot"></div>
           </h2>
-
           <h2>
             Home
             <div class="dot"></div>
           </h2>
           <h2 class="active">
             Work
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            TWICE
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            The Damai
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            FABRIC™
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Aanstekelijk
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Base Create
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            AVVR
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            GraphicHunters
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Future Goals
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Atypikal
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            One:Nil
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Andy Hardy
             <div class="dot"></div>
           </h2>
           <h2>
@@ -147,10 +266,6 @@
           </h2>
           <h2>
             Success
-            <div class="dot"></div>
-          </h2>
-          <h2>
-            Archive
             <div class="dot"></div>
           </h2>
           <h2>
@@ -173,165 +288,14 @@
       data-barba="container"
       data-barba-namespace="work"
     >
-      <div class="mouse-pos-list-image no-select">
-        <div class="mouse-pos-list-image-bounce overlay">
-          <div class="float-image-wrap">
-            <li
-              class="mouse-pos-list-image-inner development interaction visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #f1f1f1;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/twice/0ab7e43954-1710404752/thumbnail-twice-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li
-              class="mouse-pos-list-image-inner design development interaction visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #e0d9d1;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/the-damai/b511d32d21-1710452224/thumbnail-thedamai-v2-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li
-              class="mouse-pos-list-image-inner design development interaction visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #48494a;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/fabric/ac07564a5f-1688453092/thumbnail-fabric-darkgray-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li
-              class="mouse-pos-list-image-inner design development interaction visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #101010;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/aanstekelijk/441187fb44-1687423090/thumbnail-aanstekelijk-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li
-              class="mouse-pos-list-image-inner development interaction design visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #363637;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/base-create/1f2468ab51-1680179645/thumbnail-base-desktop-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li
-              class="mouse-pos-list-image-inner design development interaction visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #d8d3cd;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/avvr/4d2a7758a4-1672918357/thumbnail-avvr-v2-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li class="mouse-pos-list-image-inner design development visible">
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #7e7e7e;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/graphichunters/0daec771af-1660128857/thumbnail-gh-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li
-              class="mouse-pos-list-image-inner development interaction visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #dcd0c2;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/future-goals/614e28a662-1653057688/thumbnail-futuregoals-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li
-              class="mouse-pos-list-image-inner development interaction visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #b1a994;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/atypikal/fd1951ffc9-1646837277/thumbnail-atypikal-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li
-              class="mouse-pos-list-image-inner development interaction visible"
-            >
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: var(--color-lightgray);
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/one-nil/288460827e-1646837272/thumbnail-onenil-v3-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-            <li class="mouse-pos-list-image-inner design development visible">
-              <div
-                class="overlay overlay-image lazy"
-                style="
-                  background-color: #626d6e;
-                  background-position: center center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                "
-                data-bg="index.html/media/pages/work/andy-hardy/f152b03247-1646837253/thumbnail-andyhardy-810x810-crop-q72.jpg"
-              ></div>
-            </li>
-          </div>
-        </div>
-      </div>
-      <div class="mouse-pos-list-btn no-select"></div>
-      <div class="mouse-pos-list-span no-select"><p>View</p></div>
-      <div class="btn btn-hamburger">
+      <div
+        class="btn btn-hamburger"
+        role="button"
+        tabindex="0"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="fixed-nav"
+      >
         <div
           class="btn-click magnetic"
           data-strength="50"
@@ -339,13 +303,19 @@
         >
           <div class="btn-fill"></div>
           <div class="btn-text">
-            <div class="btn-bars"></div>
+            <div class="btn-bars" aria-hidden="true"></div>
             <span class="btn-text-inner">Menu</span>
           </div>
         </div>
       </div>
       <div class="overlay fixed-nav-back"></div>
-      <div class="fixed-nav theme-dark">
+      <div
+        class="fixed-nav theme-dark"
+        id="fixed-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+      >
         <div class="fixed-nav-rounded-div">
           <div class="rounded-div-wrap">
             <div class="rounded-div"></div>
@@ -413,34 +383,9 @@
               <ul>
                 <li class="btn btn-link btn-link-external">
                   <a
-                    href=""
+                    href="https://www.linkedin.com/in/salman-moosa/"
                     target="_blank"
-                    class="btn-click magnetic"
-                    data-strength="20"
-                    data-strength-text="10"
-                  >
-                    <span class="btn-text">
-                      <span class="btn-text-inner">Instagram</span>
-                    </span>
-                  </a>
-                </li>
-                <li class="btn btn-link btn-link-external">
-                  <a
-                    href=""
-                    target="_blank"
-                    class="btn-click magnetic"
-                    data-strength="20"
-                    data-strength-text="10"
-                  >
-                    <span class="btn-text">
-                      <span class="btn-text-inner">Twitter</span>
-                    </span>
-                  </a>
-                </li>
-                <li class="btn btn-link btn-link-external">
-                  <a
-                    href="https://www.linkedin.com/in/salmanmoosa/"
-                    target="_blank"
+                    rel="noopener noreferrer"
                     class="btn-click magnetic"
                     data-strength="20"
                     data-strength-text="10"
@@ -450,12 +395,31 @@
                     </span>
                   </a>
                 </li>
+                <li class="btn btn-link btn-link-external">
+                  <a
+                    href="https://github.com/Salman-Moosa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-click magnetic"
+                    data-strength="20"
+                    data-strength-text="10"
+                  >
+                    <span class="btn-text">
+                      <span class="btn-text-inner">GitHub</span>
+                    </span>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="main-wrap" data-scroll-container="">
+      <div
+        class="main-wrap"
+        id="main-content"
+        data-scroll-container=""
+        tabindex="-1"
+      >
         <header
           class="section default-header work-header"
           data-scroll-section=""
@@ -535,710 +499,40 @@
           <div class="container medium">
             <div class="row">
               <div class="flex-col once-in">
-                <h1>
-                  <span>Creating next level </span><span>digital products</span>
-                </h1>
+                <h1><span>DevOps & Cloud </span><span>Infrastructure</span></h1>
               </div>
             </div>
           </div>
         </header>
-        <section class="section work-filters" data-scroll-section="">
-          <div class="container once-in">
-            <div class="filter-row">
-              <div class="toggle-row">
-                <div class="btn btn-normal all-btn active">
-                  <div
-                    class="btn-click magnetic"
-                    data-strength="25"
-                    data-strength-text="15"
-                  >
-                    <div class="btn-fill"></div>
-                    <span class="btn-text">
-                      <span class="btn-text-inner change">All</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="btn btn-normal design-btn">
-                  <div
-                    class="btn-click magnetic"
-                    data-strength="25"
-                    data-strength-text="15"
-                  >
-                    <div class="btn-fill"></div>
-                    <span class="btn-text">
-                      <span class="btn-text-inner change"
-                        >Design
-                        <div class="count-nr">7</div></span
-                      >
-                    </span>
-                  </div>
-                </div>
-                <div class="btn btn-normal development-btn">
-                  <div
-                    class="btn-click magnetic"
-                    data-strength="25"
-                    data-strength-text="15"
-                  >
-                    <div class="btn-fill"></div>
-                    <span class="btn-text">
-                      <span class="btn-text-inner change"
-                        >Development
-                        <div class="count-nr">11</div></span
-                      >
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="grid-row">
-                <div class="btn btn-normal btn-icon rows-btn active">
-                  <div
-                    class="btn-click magnetic"
-                    data-strength="25"
-                    data-strength-text="15"
-                  >
-                    <div class="btn-fill"></div>
-                    <span class="btn-text">
-                      <span class="btn-text-inner change"
-                        ><svg
-                          style="width: 20px"
-                          width="20"
-                          height="19"
-                          viewBox="0 0 20 19"
-                        >
-                          <g fill="currentColor" fill-rule="evenodd">
-                            <path
-                              d="M0 6h20v1H0zM0 0h20v1H0zM0 12h20v1H0zM0 18h20v1H0z"
-                            ></path>
-                          </g></svg
-                      ></span>
-                    </span>
-                  </div>
-                </div>
-                <div class="btn btn-normal btn-icon columns-btn">
-                  <div
-                    class="btn-click magnetic"
-                    data-strength="25"
-                    data-strength-text="15"
-                  >
-                    <div class="btn-fill"></div>
-                    <span class="btn-text">
-                      <span class="btn-text-inner change"
-                        ><svg
-                          style="width: 20px"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                        >
-                          <g fill="currentColor" fill-rule="nonzero">
-                            <path
-                              d="M8 0H0v8h8V0zM7 1v6H1V1h6zM8 12H0v8h8v-8zm-1 1v6H1v-6h6zM20 0h-8v8h8V0zm-1 1v6h-6V1h6zM20 12h-8v8h8v-8zm-1 1v6h-6v-6h6z"
-                            ></path>
-                          </g></svg
-                      ></span>
-                    </span>
-                  </div>
-                </div>
-              </div>
+
+        <section class="coming-soon-section" data-scroll-section="">
+          <div class="coming-soon-content once-in">
+            <h2>
+              Portfolio Coming Soon<span class="animate-dot">.</span
+              ><span class="animate-dot">.</span
+              ><span class="animate-dot">.</span>
+            </h2>
+            <p>
+              I'm currently building out my portfolio with DevOps projects,
+              CI/CD implementations, and cloud infrastructure work. Check back
+              soon!
+            </p>
+            <div class="tech-stack">
+              <span class="tech-badge">Docker</span>
+              <span class="tech-badge">Kubernetes</span>
+              <span class="tech-badge">AWS</span>
+              <span class="tech-badge">Terraform</span>
+              <span class="tech-badge">CI/CD</span>
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Bash</span>
+              <span class="tech-badge">Git</span>
             </div>
-          </div>
-        </section>
-        <section
-          class="section-wrap section-wrap-work once-in"
-          data-scroll-section=""
-        >
-          <section
-            class="section work-grid small-work-grid grid-fade grid-rows-part visible"
-          >
-            <div class="container">
-              <div class="grid-sub-title">
-                <div class="flex-col">
-                  <h5>Client</h5>
-                </div>
-                <div class="flex-col">
-                  <h5>Location</h5>
-                </div>
-                <div class="flex-col">
-                  <h5>Services</h5>
-                </div>
-                <div class="flex-col">
-                  <h5>Year</h5>
-                </div>
-              </div>
-              <ul class="work-items mouse-pos-list-image-wrap all-active">
-                <li class="development interaction visible">
-                  <div class="stripe animate"></div>
-                  <a href="work/twice" class="row">
-                    <div class="flex-col">
-                      <h4><span>TWICE</span></h4>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Spain</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Interaction &amp; Development</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>2024</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="design development interaction visible">
-                  <div class="stripe animate"></div>
-                  <a href="work/the-damai" class="row">
-                    <div class="flex-col">
-                      <h4><span>The Damai</span></h4>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Bali, Indonesia</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Design &amp; Development</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>2024</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="design development interaction visible">
-                  <div class="stripe animate"></div>
-                  <a href="work/fabric" class="row">
-                    <div class="flex-col">
-                      <h4><span>FABRIC™</span></h4>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>United Kingdom</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Design &amp; Development</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>2023</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="design development interaction visible">
-                  <div class="stripe animate"></div>
-                  <a href="work/aanstekelijk" class="row">
-                    <div class="flex-col">
-                      <h4><span>Aanstekelijk</span></h4>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>The Netherlands</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Design &amp; Development</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>2023</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="development interaction design visible">
-                  <div class="stripe animate"></div>
-                  <a href="work/base-create" class="row">
-                    <div class="flex-col">
-                      <h4><span>Base Create</span></h4>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Hong Kong</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Design &amp; Development</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>2023</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="design development interaction visible">
-                  <div class="stripe animate"></div>
-                  <a href="work/avvr" class="row">
-                    <div class="flex-col">
-                      <h4><span>AVVR</span></h4>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>The Netherlands</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Design &amp; Development</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>2023</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="design development visible">
-                  <div class="stripe animate"></div>
-                  <a href="work/graphichunters" class="row">
-                    <div class="flex-col">
-                      <h4><span>GraphicHunters</span></h4>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>The Netherlands</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>Design &amp; Development</p>
-                    </div>
-                    <div class="flex-col animate">
-                      <p>2022</p>
-                    </div>
-                  </a>
-                </li>
-                <li class="development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/future-goals" class="row">
-                      <div class="flex-col">
-                        <h4><span>Future Goals</span></h4>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>Curaçao</p>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>Interaction &amp; Development</p>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>2022</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/atypikal" class="row">
-                      <div class="flex-col">
-                        <h4><span>Atypikal</span></h4>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>United States</p>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>Interaction &amp; Development</p>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>2021</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/one-nil" class="row">
-                      <div class="flex-col">
-                        <h4><span>One:Nil</span></h4>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>The Netherlands</p>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>Interaction &amp; Development</p>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>2021</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="design development visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/andy-hardy" class="row">
-                      <div class="flex-col">
-                        <h4><span>Andy Hardy</span></h4>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>Australia</p>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>Design &amp; Development</p>
-                      </div>
-                      <div class="flex-col animate">
-                        <p>2020</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <div class="stripe last animate"></div>
-              </ul>
-            </div>
-          </section>
-          <section class="section work-tiles grid-fade grid-columns-part">
-            <div class="container">
-              <ul>
-                <li class="development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/twice" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #f1f1f1"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/twice/0ab7e43954-1710404752/thumbnail-twice.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>TWICE</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Interaction &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2024</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="design development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/the-damai" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #e0d9d1"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/the-damai/b511d32d21-1710452224/thumbnail-thedamai-v2.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>The Damai</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Design &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2024</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="design development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/fabric" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #48494a"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/fabric/ac07564a5f-1688453092/thumbnail-fabric-darkgray.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>FABRIC™</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Design &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2023</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="design development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/aanstekelijk" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #101010"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/aanstekelijk/441187fb44-1687423090/thumbnail-aanstekelijk.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>Aanstekelijk</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Design &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2023</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="development interaction design visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/base-create" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #363637"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/base-create/1f2468ab51-1680179645/thumbnail-base-desktop.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>Base Create</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Design &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2023</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="design development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/avvr" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #d8d3cd"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/avvr/4d2a7758a4-1672918357/thumbnail-avvr-v2.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>AVVR</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Design &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2023</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="design development visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/graphichunters" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #7e7e7e"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/graphichunters/0daec771af-1660128857/thumbnail-gh.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>GraphicHunters</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Design &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2022</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/future-goals" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #dcd0c2"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/future-goals/614e28a662-1653057688/thumbnail-futuregoals.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>Future Goals</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Interaction &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2022</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/atypikal" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #b1a994"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/atypikal/fd1951ffc9-1646837277/thumbnail-atypikal.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>Atypikal</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Interaction &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2021</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="development interaction visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/one-nil" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: var(--color-lightgray)"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/one-nil/288460827e-1646837272/thumbnail-onenil-v3.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>One:Nil</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Interaction &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2021</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-                <li class="design development visible">
-                  <div class="single-tile-wrap">
-                    <a href="work/andy-hardy" class="row">
-                      <div class="flex-col">
-                        <div class="tile-image">
-                          <div
-                            class="overlay overlay-color"
-                            style="background-color: #626d6e"
-                          ></div>
-                          <div
-                            class="overlay overlay-image lazy"
-                            style="
-                              background-position: center center;
-                              background-repeat: no-repeat;
-                              background-size: cover;
-                            "
-                            data-bg="index.html/media/pages/work/andy-hardy/f152b03247-1646837253/thumbnail-andyhardy.jpg"
-                          ></div>
-                        </div>
-                      </div>
-                      <div class="flex-col">
-                        <h4><span>Andy Hardy</span></h4>
-                        <div class="stripe"></div>
-                      </div>
-                      <div class="flex-col">
-                        <p>Design &amp; Development</p>
-                      </div>
-                      <div class="flex-col">
-                        <p>2020</p>
-                      </div>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </section>
-        </section>
-        <section
-          class="section center-grid-btn center-grid-btn-archive"
-          data-scroll-section=""
-        >
-          <div class="container">
-            <div class="grid-after-btn">
-              <div class="btn btn-normal btn-dark">
+            <div style="margin-top: 3em">
+              <div class="btn btn-normal">
                 <a
-                  href="index.html/archive"
+                  href="https://github.com/Salman-Moosa"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="btn-click magnetic"
                   data-strength="25"
                   data-strength-text="15"
@@ -1246,8 +540,7 @@
                   <div class="btn-fill"></div>
                   <span class="btn-text">
                     <span class="btn-text-inner change"
-                      >Archive
-                      <div class="count-nr">59</div></span
+                      >View GitHub Projects</span
                     >
                   </span>
                 </a>
@@ -1255,6 +548,134 @@
             </div>
           </div>
         </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section" data-scroll-section="">
+          <div class="container">
+            <div class="skills-header once-in">
+              <h2>Skills & Expertise</h2>
+              <p>Technologies and tools I work with</p>
+            </div>
+            <div class="skills-grid">
+              <!-- Programming Languages -->
+              <div class="skill-category once-in">
+                <div class="skill-category-header">
+                  <h4>Programming Languages</h4>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">Java</span>
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">SQL</span>
+                  <span class="skill-tag">HTML</span>
+                  <span class="skill-tag">CSS</span>
+                  <span class="skill-tag">Bash</span>
+                  <span class="skill-tag">Shell Scripting</span>
+                </div>
+              </div>
+
+              <!-- Cloud & DevOps -->
+              <div class="skill-category once-in">
+                <div class="skill-category-header">
+                  <h4>Cloud & DevOps</h4>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">AWS</span>
+                  <span class="skill-tag">DevOps Practices</span>
+                  <span class="skill-tag">Docker</span>
+                  <span class="skill-tag">CI/CD</span>
+                  <span class="skill-tag">Git</span>
+                  <span class="skill-tag">GitHub</span>
+                  <span class="skill-tag">CLI Commands</span>
+                  <span class="skill-tag">Scripting Techniques</span>
+                  <span class="skill-tag">Version Control</span>
+                </div>
+              </div>
+
+              <!-- Operating Systems -->
+              <div class="skill-category once-in">
+                <div class="skill-category-header">
+                  <h4>Operating Systems</h4>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">Windows</span>
+                  <span class="skill-tag">MacOS</span>
+                  <span class="skill-tag">Linux</span>
+                </div>
+              </div>
+
+              <!-- Software Engineering & Architecture -->
+              <div class="skill-category once-in">
+                <div class="skill-category-header">
+                  <h4>Software Engineering & Architecture</h4>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">OOP</span>
+                  <span class="skill-tag">SDLC</span>
+                  <span class="skill-tag">Design Patterns</span>
+                  <span class="skill-tag">Debugging</span>
+                  <span class="skill-tag">Code Reviews</span>
+                  <span class="skill-tag">Deployment</span>
+                  <span class="skill-tag">Cloud Development</span>
+                  <span class="skill-tag">Data Science Tools</span>
+                  <span class="skill-tag">IT Support</span>
+                  <span class="skill-tag">Monitoring Dashboards</span>
+                  <span class="skill-tag">Build Automation</span>
+                  <span class="skill-tag">Source Control</span>
+                </div>
+              </div>
+
+              <!-- Design and Visualization -->
+              <div class="skill-category once-in">
+                <div class="skill-category-header">
+                  <h4>Design & Visualization</h4>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">Figma</span>
+                  <span class="skill-tag">3Ds Max</span>
+                  <span class="skill-tag">Blender</span>
+                </div>
+              </div>
+
+              <!-- Productivity Tools -->
+              <div class="skill-category once-in">
+                <div class="skill-category-header">
+                  <h4>Productivity Tools</h4>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">MS Excel</span>
+                  <span class="skill-tag">MS Word</span>
+                  <span class="skill-tag">Microsoft 365</span>
+                  <span class="skill-tag">Google Sheets</span>
+                  <span class="skill-tag">Google Docs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Soft Skills Section -->
+        <section class="soft-skills-section" data-scroll-section="">
+          <div class="container">
+            <div class="soft-skills-header once-in">
+              <h3>Professional Skills</h3>
+            </div>
+            <div class="soft-skills-grid once-in">
+              <span class="soft-skill-badge">Communication</span>
+              <span class="soft-skill-badge">Leadership</span>
+              <span class="soft-skill-badge">Team Collaboration</span>
+              <span class="soft-skill-badge">System Integration</span>
+              <span class="soft-skill-badge">Project Management</span>
+              <span class="soft-skill-badge">Technical Documentation</span>
+              <span class="soft-skill-badge">Troubleshooting</span>
+              <span class="soft-skill-badge">Issue Resolution</span>
+              <span class="soft-skill-badge">Analytical Thinking</span>
+              <span class="soft-skill-badge">Problem Solving</span>
+              <span class="soft-skill-badge">Adaptability</span>
+              <span class="soft-skill-badge">Quick Learner</span>
+            </div>
+          </div>
+        </section>
+
         <div class="footer-rounded-div" data-scroll-section="">
           <div class="rounded-div-wrap">
             <div class="rounded-div"></div>
@@ -1274,7 +695,6 @@
               <div class="row">
                 <div class="flex-col">
                   <div class="arrow">
-                    <!--?xml version="1.0" encoding="UTF-8"?-->
                     <svg
                       width="14px"
                       height="14px"
@@ -1319,7 +739,13 @@
                   </div>
                   <h2>
                     <span
-                      ><div class="profile-picture"></div>
+                      ><img
+                        class="profile-picture"
+                        src="assets/images/DSC07033.jpg"
+                        alt="Salman Moosa"
+                        width="80"
+                        height="80"
+                      />
                       Let's work </span
                     ><span>together</span>
                   </h2>
@@ -1352,49 +778,13 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="flex-col">
-                  <div class="btn btn-normal">
-                    <a
-                      href="sallucnr@gmail.com"
-                      class="btn-click magnetic"
-                      data-strength="25"
-                      data-strength-text="15"
-                    >
-                      <div class="btn-fill"></div>
-                      <span class="btn-text">
-                        <span class="btn-text-inner change"
-                          >sallucnr@gmail.com</span
-                        >
-                      </span>
-                    </a>
-                  </div>
-                  <div class="btn btn-normal">
-                    <a
-                      href="tel:7012229293"
-                      class="btn-click magnetic"
-                      data-strength="25"
-                      data-strength-text="15"
-                    >
-                      <div class="btn-fill"></div>
-                      <span class="btn-text">
-                        <span class="btn-text-inner change">7012229293</span>
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="container no-padding">
               <div class="row bottom-footer">
                 <div class="flex-col">
                   <div class="credits">
                     <h5>Version</h5>
-                    <p>2024 © Edition</p>
-                  </div>
-                  <div class="time">
-                    <h5>Local time</h5>
-                    <p><span id="timeSpan">09:41 PM CET</span></p>
+                    <p>2025 © Edition</p>
                   </div>
                 </div>
                 <div class="flex-col">
@@ -1403,40 +793,29 @@
                     <ul>
                       <li class="btn btn-link btn-link-external">
                         <a
-                          href="https://www.instagram.com"
-                          target="_blank"
-                          class="btn-click magnetic"
-                          data-strength="20"
-                          data-strength-text="10"
-                        >
-                          <span class="btn-text">
-                            <span class="btn-text-inner">Instagram</span>
-                          </span>
-                        </a>
-                      </li>
-                      <li class="btn btn-link btn-link-external">
-                        <a
-                          href="https://www.instagram.com"
-                          target="_blank"
-                          class="btn-click magnetic"
-                          data-strength="20"
-                          data-strength-text="10"
-                        >
-                          <span class="btn-text">
-                            <span class="btn-text-inner">Twitter</span>
-                          </span>
-                        </a>
-                      </li>
-                      <li class="btn btn-link btn-link-external">
-                        <a
                           href="https://www.linkedin.com/in/salman-moosa/"
                           target="_blank"
+                          rel="noopener noreferrer"
                           class="btn-click magnetic"
                           data-strength="20"
                           data-strength-text="10"
                         >
                           <span class="btn-text">
                             <span class="btn-text-inner">LinkedIn</span>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="btn btn-link btn-link-external">
+                        <a
+                          href="https://github.com/Salman-Moosa"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="btn-click magnetic"
+                          data-strength="20"
+                          data-strength-text="10"
+                        >
+                          <span class="btn-text">
+                            <span class="btn-text-inner">GitHub</span>
                           </span>
                         </a>
                       </li>
@@ -1457,7 +836,6 @@
     <script src="js/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.10.3"></script>
     <script src="js/lazyload.min.js"></script>
-
     <script src="js/locomotive-scroll.min.js"></script>
     <script defer="" src="js/index-new.js"></script>
   </body>

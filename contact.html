@@ -3,10 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Contact - Salman Moosa</title>
     <meta
       name="description"
@@ -69,7 +66,7 @@
     />
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
     <style>
-      /* Override autofill styles */
+      /* Override autofill styles for dark theme */
       input:-webkit-autofill,
       input:-webkit-autofill:hover,
       input:-webkit-autofill:focus,
@@ -78,25 +75,79 @@
       textarea:-webkit-autofill:hover,
       textarea:-webkit-autofill:focus,
       textarea:-webkit-autofill:active {
-        -webkit-text-fill-color: white !important;
-        -webkit-box-shadow: 0 0 0 30px #1c1d20 inset !important;
+        -webkit-text-fill-color: #ffffff !important;
+        -webkit-box-shadow: 0 0 0 1000px #1c1d20 inset !important;
+        box-shadow: 0 0 0 1000px #1c1d20 inset !important;
         transition: background-color 5000s ease-in-out 0s;
+        caret-color: #ffffff !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
       }
 
-      /* Ensure placeholder text remains visible */
-      ::placeholder {
-        color: rgba(255, 255, 255, 0.5) !important;
-        opacity: 1;
+      /* Firefox autofill override */
+      input:-moz-autofill,
+      textarea:-moz-autofill {
+        background-color: #1c1d20 !important;
+        color: #ffffff !important;
+      }
+
+      /* Ensure placeholder text is visible */
+      .form .field::placeholder {
+        color: rgba(255, 255, 255, 0.4) !important;
+        opacity: 1 !important;
+      }
+
+      .form .field::-webkit-input-placeholder {
+        color: rgba(255, 255, 255, 0.4) !important;
+      }
+
+      .form .field::-moz-placeholder {
+        color: rgba(255, 255, 255, 0.4) !important;
+        opacity: 1 !important;
+      }
+
+      .form .field:-ms-input-placeholder {
+        color: rgba(255, 255, 255, 0.4) !important;
       }
 
       /* Ensure text color is white for all form inputs */
-      .field {
-        color: white !important;
+      .form .field {
+        color: #ffffff !important;
+        background-color: transparent !important;
+        caret-color: #ffffff;
+      }
+
+      /* Focus state improvements */
+      .form .field:focus {
+        outline: none;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+      }
+
+      /* Improve label visibility when field has content */
+      .form-col.not-empty .label {
+        opacity: 0.7;
+        transform: translateY(-100%);
+      }
+
+      /* Submit button styling */
+      .form-btn {
+        background: transparent;
+        border: none;
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+      }
+
+      .form-btn:hover {
+        opacity: 0.8;
       }
     </style>
   </head>
 
   <body data-barba="wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="no-scroll-overlay"></div>
     <div class="loading-container">
       <div class="loading-screen">
@@ -144,7 +195,14 @@
       data-barba="container"
       data-barba-namespace="contact"
     >
-      <div class="btn btn-hamburger">
+      <div
+        class="btn btn-hamburger"
+        role="button"
+        tabindex="0"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="fixed-nav"
+      >
         <div
           class="btn-click magnetic"
           data-strength="50"
@@ -152,13 +210,19 @@
         >
           <div class="btn-fill"></div>
           <div class="btn-text">
-            <div class="btn-bars"></div>
+            <div class="btn-bars" aria-hidden="true"></div>
             <span class="btn-text-inner">Menu</span>
           </div>
         </div>
       </div>
       <div class="overlay fixed-nav-back"></div>
-      <div class="fixed-nav theme-dark">
+      <div
+        class="fixed-nav theme-dark"
+        id="fixed-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+      >
         <div class="fixed-nav-rounded-div">
           <div class="rounded-div-wrap">
             <div class="rounded-div"></div>
@@ -178,6 +242,18 @@
                 >
                   <span class="btn-text">
                     <span class="btn-text-inner">Home</span>
+                  </span>
+                </a>
+              </li>
+              <li class="btn btn-link">
+                <a
+                  href="work.html"
+                  class="btn-click magnetic"
+                  data-strength="24"
+                  data-strength-text="12"
+                >
+                  <span class="btn-text">
+                    <span class="btn-text-inner">Work</span>
                   </span>
                 </a>
               </li>
@@ -216,6 +292,7 @@
                   <a
                     href="https://www.linkedin.com/in/salman-moosa/"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="btn-click magnetic"
                     data-strength="20"
                     data-strength-text="10"
@@ -225,12 +302,31 @@
                     </span>
                   </a>
                 </li>
+                <li class="btn btn-link btn-link-external">
+                  <a
+                    href="https://github.com/Salman-Moosa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-click magnetic"
+                    data-strength="20"
+                    data-strength-text="10"
+                  >
+                    <span class="btn-text">
+                      <span class="btn-text-inner">GitHub</span>
+                    </span>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="main-wrap" data-scroll-container="">
+      <div
+        class="main-wrap"
+        id="main-content"
+        data-scroll-container=""
+        tabindex="-1"
+      >
         <header
           class="section default-header contact-header theme-dark"
           data-scroll-section=""
@@ -258,6 +354,18 @@
               </div>
             </div>
             <ul class="links-wrap">
+              <li class="btn btn-link">
+                <a
+                  href="work.html"
+                  class="btn-click magnetic"
+                  data-strength="20"
+                  data-strength-text="10"
+                >
+                  <span class="btn-text">
+                    <span class="btn-text-inner">Work</span>
+                  </span>
+                </a>
+              </li>
               <li class="btn btn-link">
                 <a
                   href="about.html"
@@ -300,13 +408,26 @@
               <div class="flex-col">
                 <h1>
                   <span
-                    ><div class="profile-picture"></div>
+                    ><img
+                      class="profile-picture"
+                      src="assets/images/DSC07033.jpg"
+                      alt="Salman Moosa"
+                      width="80"
+                      height="80"
+                    />
                     Let's start a </span
                   ><span>project together</span>
                 </h1>
               </div>
               <div class="flex-col">
-                <div class="profile-picture"></div>
+                <img
+                  class="profile-picture"
+                  src="assets/images/DSC07033.jpg"
+                  alt=""
+                  aria-hidden="true"
+                  width="80"
+                  height="80"
+                />
                 <div class="arrow">
                   <!--?xml version="1.0" encoding="UTF-8"?-->
                   <svg
@@ -339,7 +460,13 @@
                             id="Path"
                             points="2.76923077 0 12 0 12 9.23076923"
                           ></polyline>
-                          <line x1="12" y1="0" x2="0" y2="12" id="Path"></line>
+                          <line
+                            x1="12"
+                            y1="0"
+                            x2="0"
+                            y2="12"
+                            id="Path-2"
+                          ></line>
                         </g>
                       </g>
                     </g>
@@ -355,73 +482,115 @@
                   action="https://formspree.io/f/xnqkdrqo"
                   enctype="multipart/form-data"
                   novalidate=""
+                  aria-label="Contact form"
                 >
-                  <div class="website-field">
-                    <label class="label" for="tel">Phone Number</label>
-                    <input
-                      class="field"
-                      type="text"
-                      id="form-tel"
-                      name="phone"
-                      value=""
-                      required=""
-                      placeholder="Your Phone Number"
-                    />
-                  </div>
-                  <div class="form-col">
-                    <h5>01</h5>
-                    <label class="label" for="name">What's your name?</label>
-                    <input
-                      class="field"
-                      type="text"
-                      id="form-name"
-                      name="name"
-                      value=""
-                      required=""
-                      placeholder="Your Name *"
-                    />
-                  </div>
-                  <div class="form-col">
-                    <h5>02</h5>
-                    <label class="label" for="email">What's your email?</label>
-                    <input
-                      class="field"
-                      type="email"
-                      id="form-email"
-                      name="email"
-                      value=""
-                      required=""
-                      placeholder="Your Email *"
-                    />
-                  </div>
-                  <div class="form-col">
-                    <h5>03</h5>
-                    <label class="label" for="company"
-                      >What's the name of your organization?</label
+                  <fieldset style="border: none; padding: 0; margin: 0">
+                    <legend
+                      class="visually-hidden"
+                      style="position: absolute; left: -9999px"
                     >
-                    <input
-                      class="field"
-                      type="text"
-                      id="form-company"
-                      name="company"
-                      value=""
-                      required=""
-                      placeholder="Your Organization *"
-                    />
-                  </div>
-                  <div class="form-col">
-                    <h5>04</h5>
-                    <label class="label" for="message">Your message</label>
-                    <textarea
-                      class="field"
-                      type="text"
-                      id="form-message"
-                      name="message"
-                      rows="8"
-                      required=""
-                      placeholder="Hello Salman, can you help me with ... *"
-                    ></textarea>
-                  </div>
+                      Contact Information
+                    </legend>
+                    <div class="website-field" aria-hidden="true">
+                      <label class="label" for="form-tel">Phone Number</label>
+                      <input
+                        class="field"
+                        type="text"
+                        id="form-tel"
+                        name="phone"
+                        value=""
+                        tabindex="-1"
+                        autocomplete="off"
+                        placeholder="Your Phone Number"
+                      />
+                    </div>
+                    <div class="form-col">
+                      <h5 aria-hidden="true">01</h5>
+                      <label class="label" for="form-name"
+                        >What's your name?</label
+                      >
+                      <input
+                        class="field"
+                        type="text"
+                        id="form-name"
+                        name="name"
+                        autocomplete="name"
+                        spellcheck="false"
+                        required
+                        aria-required="true"
+                        aria-describedby="form-name-hint"
+                        placeholder="Your Name *"
+                      />
+                      <span
+                        id="form-name-hint"
+                        class="visually-hidden"
+                        style="position: absolute; left: -9999px"
+                        >Required field</span
+                      >
+                    </div>
+                    <div class="form-col">
+                      <h5 aria-hidden="true">02</h5>
+                      <label class="label" for="form-email"
+                        >What's your email?</label
+                      >
+                      <input
+                        class="field"
+                        type="email"
+                        id="form-email"
+                        name="email"
+                        autocomplete="email"
+                        spellcheck="false"
+                        required
+                        aria-required="true"
+                        aria-describedby="form-email-hint"
+                        placeholder="Your Email *"
+                      />
+                      <span
+                        id="form-email-hint"
+                        class="visually-hidden"
+                        style="position: absolute; left: -9999px"
+                        >Required field</span
+                      >
+                    </div>
+                    <div class="form-col">
+                      <h5 aria-hidden="true">03</h5>
+                      <label class="label" for="form-company"
+                        >What's the name of your organization?</label
+                      >
+                      <input
+                        class="field"
+                        type="text"
+                        id="form-company"
+                        name="company"
+                        autocomplete="organization"
+                        spellcheck="false"
+                        placeholder="Your Organization (optional)"
+                      />
+                    </div>
+                    <div class="form-col">
+                      <h5 aria-hidden="true">04</h5>
+                      <label class="label" for="form-message"
+                        >Your message</label
+                      >
+                      <textarea
+                        class="field"
+                        id="form-message"
+                        name="message"
+                        rows="8"
+                        autocomplete="off"
+                        required
+                        aria-required="true"
+                        aria-describedby="form-message-hint"
+                        placeholder="Hello Salman, can you help me with ... *"
+                      ></textarea>
+                      <span
+                        id="form-message-hint"
+                        class="visually-hidden"
+                        style="position: absolute; left: -9999px"
+                        >Required field</span
+                      >
+                    </div>
+                  </fieldset>
                   <div class="btn-contact-send">
                     <div
                       class="btn btn-round"
@@ -451,8 +620,9 @@
               <div class="flex-col">
                 <h5>Business Details</h5>
                 <ul class="links-wrap">
-                  <li><p>Salman Moosa</p></li>
-                  <li><p>Location: Kerala, India</p></li>
+                  <li><p>Salman Moosa Muhammed</p></li>
+                  <li><p>DevOps Engineer</p></li>
+                  <li><p>Kerala, India</p></li>
                 </ul>
                 <h5>Socials</h5>
                 <ul class="links-wrap">
@@ -460,12 +630,27 @@
                     <a
                       href="https://www.linkedin.com/in/salman-moosa/"
                       target="_blank"
+                      rel="noopener noreferrer"
                       class="btn-click magnetic"
                       data-strength="20"
                       data-strength-text="10"
                     >
                       <span class="btn-text">
                         <span class="btn-text-inner">LinkedIn</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li class="btn btn-link btn-link-external">
+                    <a
+                      href="https://github.com/Salman-Moosa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn-click magnetic"
+                      data-strength="20"
+                      data-strength-text="10"
+                    >
+                      <span class="btn-text">
+                        <span class="btn-text-inner">GitHub</span>
                       </span>
                     </a>
                   </li>
@@ -495,12 +680,27 @@
                       <a
                         href="https://www.linkedin.com/in/salman-moosa/"
                         target="_blank"
+                        rel="noopener noreferrer"
                         class="btn-click magnetic"
                         data-strength="20"
                         data-strength-text="10"
                       >
                         <span class="btn-text">
                           <span class="btn-text-inner">LinkedIn</span>
+                        </span>
+                      </a>
+                    </li>
+                    <li class="btn btn-link btn-link-external">
+                      <a
+                        href="https://github.com/Salman-Moosa"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-click magnetic"
+                        data-strength="20"
+                        data-strength-text="10"
+                      >
+                        <span class="btn-text">
+                          <span class="btn-text-inner">GitHub</span>
                         </span>
                       </a>
                     </li>
