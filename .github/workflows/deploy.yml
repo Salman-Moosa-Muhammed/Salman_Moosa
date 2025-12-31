@@ -8,9 +8,9 @@ on:
     branches:
       - master
       - main
-    paths:
-      - "Salman_Moosa/**"
-      - ".github/workflows/deploy.yml"
+    paths-ignore:
+      - "README.md"
+      - ".gitignore"
   workflow_dispatch:
     inputs:
       branch:
@@ -76,7 +76,7 @@ jobs:
           path: |
             .jekyll-cache
             .sass-cache
-          key: ${{ runner.os }}-jekyll-${{ hashFiles('Salman_Moosa/**') }}
+          key: ${{ runner.os }}-jekyll-${{ hashFiles('**/*.html', '**/*.css', '**/*.js') }}
           restore-keys: |
             ${{ runner.os }}-jekyll-
 
@@ -87,7 +87,7 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./Salman_Moosa
+          source: ./
           destination: ./_site
         env:
           JEKYLL_ENV: production
