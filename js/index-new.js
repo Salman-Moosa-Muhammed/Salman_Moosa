@@ -1,6 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
 let scroll;
+let loadingComplete = false;
 
 const body = document.body;
 const select = (e) => document.querySelector(e);
@@ -17,7 +18,45 @@ function markAsVisited() {
   Cookies.set("visited", "true", { expires: 1 }); // Expires in 1 day
 }
 
+// Fallback: Force complete loading if it takes too long (5 seconds)
+// Average load time is ~2-3 seconds, so 5 seconds is a safe timeout
+let loadingTimeout = null;
+
+function initLoadingFallback() {
+  // Clear any existing timeout
+  if (loadingTimeout) {
+    clearTimeout(loadingTimeout);
+  }
+  loadingTimeout = setTimeout(function() {
+    if (!loadingComplete) {
+      forceCompleteLoading();
+    }
+  }, 5000);
+}
+
+// Force loading screen to complete immediately
+function forceCompleteLoading() {
+  if (loadingComplete) return;
+  loadingComplete = true;
+  
+  gsap.set(".loading-screen", { top: "-100%" });
+  gsap.set(".loading-screen .rounded-div-wrap.bottom", { height: "0vh" });
+  gsap.set(".loading-screen .rounded-div-wrap.top", { height: "0vh" });
+  gsap.set(".loading-words", { opacity: 0 });
+  gsap.set("main .once-in", { y: "0vh", clearProps: "transform" });
+  gsap.set("html", { cursor: "auto" });
+  
+  if (scroll) scroll.start();
+  markAsVisited();
+}
+
+// Mark loading as complete (called at end of animations)
+function markLoadingComplete() {
+  loadingComplete = true;
+}
+
 initPageTransitions();
+initLoadingFallback();
 
 // Animation - Quick Loader for repeat visits (0.5s max)
 function initLoaderFast() {
@@ -42,7 +81,7 @@ function initLoaderFast() {
   }
 
   tl.call(function () {
-    scroll.stop();
+    if (scroll) scroll.stop();
   });
 
   tl.to(".loading-screen", {
@@ -73,7 +112,8 @@ function initLoaderFast() {
   );
 
   tl.call(function () {
-    scroll.start();
+    if (scroll) scroll.start();
+    markLoadingComplete();
   });
 
   markAsVisited();
@@ -137,7 +177,7 @@ function initLoaderHome() {
   });
 
   tl.call(function () {
-    scroll.stop();
+    if (scroll) scroll.stop();
   });
 
   // Fade in the loading words container
@@ -226,7 +266,8 @@ function initLoaderHome() {
   );
 
   tl.call(function () {
-    scroll.start();
+    if (scroll) scroll.start();
+    markLoadingComplete();
   });
 
   // Mark as visited after full animation completes
@@ -329,12 +370,20 @@ function initLoader() {
     "=-.8"
   );
 
+  tl.call(function () {
+    markLoadingComplete();
+  });
+
   // Mark as visited after full animation completes
   markAsVisited();
 }
 
 // Animation - Page transition In
 function pageTransitionIn() {
+  // Reset loading state for new transition and start fallback timer
+  loadingComplete = false;
+  initLoadingFallback();
+  
   var tl = gsap.timeline();
 
   tl.call(function () {
@@ -486,6 +535,10 @@ function pageTransitionOut() {
     ease: "Expo.easeOut",
     delay: 0.8,
     clearProps: "true",
+  });
+
+  tl.call(function () {
+    markLoadingComplete();
   });
 }
 

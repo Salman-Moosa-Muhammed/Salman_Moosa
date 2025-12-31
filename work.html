@@ -26,12 +26,12 @@
     <title>Work - Salman Moosa</title>
     <meta
       name="description"
-      content="DevOps and cloud infrastructure projects. Portfolio showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
+      content="A curated collection of DevOps projects and technical expertise. Showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
     />
     <meta property="og:title" content="Work - Salman Moosa" />
     <meta
       property="og:description"
-      content="DevOps and cloud infrastructure projects. Portfolio showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
+      content="A curated collection of DevOps projects and technical expertise. Showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
     />
     <meta property="og:image" content="assets/images/DSC07033.jpg" />
     <meta property="og:site_name" content="Salman Moosa" />
@@ -40,7 +40,7 @@
     <meta property="twitter:title" content="Work - Salman Moosa" />
     <meta
       property="twitter:description"
-      content="DevOps and cloud infrastructure projects. Portfolio showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
+      content="A curated collection of DevOps projects and technical expertise. Showcasing Docker, Kubernetes, AWS, Terraform, and CI/CD implementations."
     />
     <meta property="twitter:image" content="assets/images/DSC07033.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -61,182 +61,442 @@
     <link href="css/components.css" rel="stylesheet" />
     <link href="css/style-new.css" rel="stylesheet" />
     <style>
-      .coming-soon-section {
-        min-height: 40vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: var(--section-padding) var(--container-padding);
+      /* Reduce header spacing for work page */
+      .work-header {
+        padding-top: calc(var(--section-padding) * 0.9) !important;
+        padding-bottom: calc(var(--section-padding) * 0.35) !important;
       }
-      .coming-soon-content h2 {
-        margin-bottom: 0.5em;
+
+      @media screen and (max-width: 720px) {
+        .work-header {
+          padding-top: calc(var(--section-padding) * 1.3) !important;
+          padding-bottom: calc(var(--section-padding) * 0.4) !important;
+        }
       }
-      .coming-soon-content p {
-        opacity: 0.6;
-        max-width: 500px;
-        margin: 0 auto;
-      }
-      .tech-stack {
+
+      /* Collapsible sections wrapper - stacks when expanded */
+      .sections-grid {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.75em;
-        margin-top: 2em;
+        gap: calc(var(--gap-padding) * 0.75);
+        padding: 0 var(--container-padding) calc(var(--section-padding) * 0.35);
+        background: var(--color-white);
       }
-      .tech-badge {
+
+      .sections-grid .collapsible-section {
+        flex: 1 1 calc(50% - calc(var(--gap-padding) * 0.375));
+        min-width: 300px;
+        transition: flex-basis 0.4s ease-in-out, opacity 0.3s ease-in-out;
+      }
+
+      /* When a section is expanded, it takes full width */
+      .sections-grid .collapsible-section.expanded {
+        flex: 1 1 100%;
+      }
+
+      @media screen and (max-width: 900px) {
+        .sections-grid {
+          gap: calc(var(--gap-padding) * 0.5);
+        }
+
+        .sections-grid .collapsible-section {
+          flex: 1 1 100%;
+        }
+      }
+
+      /* Collapsible Section Styles */
+      .collapsible-section {
+        background: var(--color-white);
+        border-radius: 0.75em;
+        overflow: hidden;
+      }
+
+      /* Only show grey hover when collapsed */
+      .collapsible-section:not(.expanded):hover {
         background: var(--color-lightgray);
+      }
+
+      /* Keep white background when expanded */
+      .collapsible-section.expanded {
+        background: var(--color-white);
+      }
+
+      .collapsible-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 1.5em 2em;
+        user-select: none;
+        transition: background 0.2s ease;
+      }
+
+      .collapsible-header:hover {
+        background: transparent;
+      }
+
+      .collapsible-header-content {
+        flex: 1;
+      }
+
+      .collapsible-header h2 {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: clamp(1.75em, 3vw, 2.5em);
+        margin: 0;
+        line-height: 1.15;
+        font-weight: 450;
+      }
+
+      .collapsible-header p {
+        font-family: "Neue Montreal", sans-serif;
+        margin: 0.35em 0 0;
+        opacity: 0.5;
+        font-size: 1em;
+        line-height: 1.5;
+        font-weight: 450;
+      }
+
+      .collapsible-toggle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-left: 1.5em;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        background: transparent;
+      }
+
+      .collapsible-header:hover .collapsible-toggle {
+        background: var(--color-dark);
+        border-color: var(--color-dark);
+        transform: scale(1.05);
+      }
+
+      .collapsible-toggle svg {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .collapsible-header:hover .collapsible-toggle svg {
+        stroke: var(--color-white);
+      }
+
+      .collapsible-section.expanded .collapsible-toggle svg {
+        transform: rotate(180deg);
+      }
+
+      /* Improved expand/collapse animation - fade in/out style */
+      .collapsible-content {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s ease-in-out;
+      }
+
+      .collapsible-section.expanded .collapsible-content {
+        grid-template-rows: 1fr;
+      }
+
+      .collapsible-content-inner {
+        overflow: hidden;
+      }
+
+      .collapsible-inner {
+        padding: 0.5em 2em 2em;
+        opacity: 0;
+        transition: opacity 0.35s ease-in-out 0.1s;
+      }
+
+      .collapsible-section.expanded .collapsible-inner {
+        opacity: 1;
+      }
+
+      /* Collapsed state - fade out */
+      .collapsible-section:not(.expanded) .collapsible-inner {
+        opacity: 0;
+        transition: opacity 0.2s ease-out;
+      }
+
+      /* Skills Section - Clean Minimal Design */
+      .skills-section .container {
+        max-width: none;
+      }
+
+      /* Fix curve color to match section background */
+      .sections-grid + .footer-rounded-div .rounded-div {
+        background: var(--color-white);
+      }
+
+      /* Projects Section */
+      .projects-section .container {
+        max-width: none;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1em;
+        margin-bottom: 1em;
+      }
+
+      .project-card {
+        display: flex;
+        flex-direction: row;
+        background: var(--color-lightgray);
+        border-radius: 0.75em;
+        overflow: hidden;
+        text-decoration: none;
         color: var(--color-dark);
-        padding: 0.5em 1.25em;
-        border-radius: 2em;
-        font-size: 0.9em;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.35s ease, background 0.2s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        background: #e4e4e6;
+      }
+
+      .project-card-image {
+        width: 140px;
+        min-height: 120px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, #1c1d20 0%, #2d2e33 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card-image::before {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        background: linear-gradient(135deg, #455ce9 0%, #334bd3 100%);
+        border-radius: 50%;
+        opacity: 0.2;
+        filter: blur(25px);
+        transition: opacity 0.3s ease;
+      }
+
+      .project-card:hover .project-card-image::before {
+        opacity: 0.4;
+      }
+
+      .project-card-image-text {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: 1em;
+        font-weight: 450;
+        color: var(--color-white);
+        text-align: center;
+        z-index: 1;
+        line-height: 1.2;
+        padding: 0.75em;
+      }
+
+      .project-card-image-text span {
+        display: block;
+        font-size: 0.7em;
+        font-weight: 300;
+        opacity: 0.6;
+        margin-top: 0.25em;
+      }
+
+      .project-card-content {
+        padding: 1.25em 1.5em;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .project-card-title {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: 1.25em;
+        font-weight: 450;
+        margin: 0 0 0.35em;
+        line-height: 1.2;
+      }
+
+      .project-card-description {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: 1em;
+        font-weight: 450;
+        opacity: 0.6;
+        margin: 0 0 0.75em;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .project-card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4em;
+      }
+
+      .project-card-tag {
+        font-family: "Neue Montreal", sans-serif;
+        background: var(--color-white);
+        padding: 0.3em 0.65em;
+        border-radius: 0.5em;
+        font-size: 0.8em;
+        font-weight: 450;
+        opacity: 0.75;
+      }
+
+      .project-card-links {
+        display: flex;
+        gap: 1em;
+        margin-top: 0.75em;
+      }
+
+      .project-card-link {
+        font-family: "Neue Montreal", sans-serif;
         display: inline-flex;
         align-items: center;
+        gap: 0.35em;
+        font-size: 0.95em;
+        color: var(--color-blue);
+        font-weight: 450;
+        transition: gap 0.25s ease;
+        margin: 0;
+      }
+
+      .project-card-link.secondary {
+        color: var(--color-dark);
+        opacity: 0.6;
+      }
+
+      .project-card-link.secondary:hover {
+        opacity: 1;
+      }
+
+      .project-card:hover .project-card-link {
         gap: 0.5em;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
-      .tech-badge:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-      .tech-badge svg {
+
+      .project-card-link svg {
         width: 1em;
         height: 1em;
+      }
+
+      /* More projects coming - refined */
+      .projects-coming-soon {
+        text-align: left;
+        padding: 1.25em 1.5em;
+        background: transparent;
+        border-radius: 0.75em;
+        border: 1px dashed var(--color-border);
+        display: flex;
+        align-items: center;
+        gap: 1em;
+      }
+
+      .projects-coming-soon-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--color-lightgray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex-shrink: 0;
       }
 
-      /* Skills Section */
-      .skills-section {
-        padding: calc(var(--section-padding) * 0.75) var(--container-padding);
-        background: var(--color-white);
+      .projects-coming-soon-icon svg {
+        width: 20px;
+        height: 20px;
+        opacity: 0.5;
       }
-      .skills-section .container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .skills-header {
-        text-align: center;
-        margin-bottom: calc(var(--section-padding) * 0.5);
-      }
-      .skills-header h2 {
-        font-size: calc(clamp(2em, 4vw, 3.5em));
-        margin-bottom: 0.25em;
-      }
-      .skills-header p {
-        opacity: 0.6;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2em;
-      }
-      @media screen and (max-width: 768px) {
-        .skills-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-      .skill-category {
-        background: var(--color-lightgray);
-        border-radius: 1em;
-        padding: 1.5em;
-        transition: transform 0.3s ease;
-      }
-      .skill-category:hover {
-        transform: translateY(-4px);
-      }
-      .skill-category-header {
-        display: flex;
-        align-items: center;
-        gap: 0.75em;
-        margin-bottom: 1em;
-        padding-bottom: 0.75em;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      }
-      .skill-category-header svg {
-        width: 1.5em;
-        height: 1.5em;
-        opacity: 0.8;
-      }
-      .skill-category-header h4 {
-        margin: 0;
+
+      .projects-coming-soon-text h4 {
+        font-family: "Neue Montreal", sans-serif;
         font-size: 1.1em;
-        font-weight: 600;
+        font-weight: 450;
+        margin: 0 0 0.2em;
+        line-height: 1.2;
       }
-      .skill-tags {
+
+      .projects-coming-soon-text p {
+        font-family: "Neue Montreal", sans-serif;
+        opacity: 0.5;
+        font-size: 1em;
+        font-weight: 450;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .skill-row {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5em;
+        padding: 1.25em 0;
+        border-bottom: 1px solid var(--color-border);
       }
+
+      .skill-row:first-of-type {
+        padding-top: 0.5em;
+        border-top: none;
+      }
+
+      .skill-row:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .skill-row-label {
+        font-family: "Neue Montreal", sans-serif;
+        width: 100%;
+        font-size: 0.75em;
+        font-weight: 450;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.5;
+        margin: 0 0 0.5em;
+      }
+
       .skill-tag {
-        background: var(--color-white);
+        font-family: "Neue Montreal", sans-serif;
+        background: var(--color-lightgray);
         color: var(--color-dark);
         padding: 0.4em 0.9em;
         border-radius: 1.5em;
-        font-size: 0.85em;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4em;
+        font-size: 1em;
+        font-weight: 450;
+        border: none;
         transition: all 0.2s ease;
-        border: 1px solid transparent;
-      }
-      .skill-tag:hover {
-        border-color: var(--color-dark);
-        transform: scale(1.02);
-      }
-      .skill-tag svg {
-        width: 0.9em;
-        height: 0.9em;
-        flex-shrink: 0;
-        opacity: 0.7;
       }
 
-      /* Soft Skills Section */
-      .soft-skills-section {
-        padding: calc(var(--section-padding) * 0.5) var(--container-padding);
-        background: var(--color-lightgray);
-      }
-      .soft-skills-header {
-        text-align: center;
-        margin-bottom: 1.5em;
-      }
-      .soft-skills-header h3 {
-        font-size: 1.5em;
-        margin-bottom: 0.25em;
-      }
-      .soft-skills-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.6em;
-        max-width: 900px;
-        margin: 0 auto;
-      }
-      .soft-skill-badge {
-        background: var(--color-white);
-        color: var(--color-dark);
-        padding: 0.5em 1em;
-        border-radius: 2em;
-        font-size: 0.9em;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4em;
-        transition: all 0.2s ease;
-      }
-      .soft-skill-badge:hover {
+      .skill-tag:hover {
         background: var(--color-dark);
         color: var(--color-white);
       }
-      .soft-skill-badge svg {
-        width: 0.9em;
-        height: 0.9em;
+
+      /* Mobile adjustments for project cards */
+      @media screen and (max-width: 600px) {
+        .project-card {
+          flex-direction: column;
+        }
+
+        .project-card-image {
+          width: 100%;
+          min-height: 60px;
+        }
       }
     </style>
   </head>
 
   <body data-barba="wrapper">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="no-scroll-overlay"></div>
     <div class="loading-container">
       <div class="loading-screen">
@@ -434,14 +694,7 @@
                   data-strength-text="10"
                 >
                   <span class="btn-text">
-                    <div class="credit"><span>©</span></div>
-                    <div class="cbd">
-                      <span class="code-by">Code by </span
-                      ><span class="salman"
-                        ><span class="salman-span"> Salman</span>
-                        <span class="moosa">Moosa</span></span
-                      >
-                    </div>
+                    <span class="btn-text-inner">Home</span>
                   </span>
                 </a>
               </div>
@@ -499,182 +752,258 @@
           <div class="container medium">
             <div class="row">
               <div class="flex-col once-in">
-                <h1><span>DevOps & Cloud </span><span>Infrastructure</span></h1>
+                <h1><span>Work </span><span>& Expertise</span></h1>
+                <p
+                  style="
+                    margin-top: 0.75em;
+                    opacity: 0.7;
+                    max-width: 500px;
+                    font-size: clamp(1em, 1.5vw, 1.15em);
+                    line-height: 1.6;
+                  "
+                >
+                  A curated collection of projects and technical proficiencies
+                  that showcase my journey in DevOps and cloud engineering.
+                </p>
               </div>
             </div>
           </div>
         </header>
 
-        <section class="coming-soon-section" data-scroll-section="">
-          <div class="coming-soon-content once-in">
-            <h2>
-              Portfolio Coming Soon<span class="animate-dot">.</span
-              ><span class="animate-dot">.</span
-              ><span class="animate-dot">.</span>
-            </h2>
-            <p>
-              I'm currently building out my portfolio with DevOps projects,
-              CI/CD implementations, and cloud infrastructure work. Check back
-              soon!
-            </p>
-            <div class="tech-stack">
-              <span class="tech-badge">Docker</span>
-              <span class="tech-badge">Kubernetes</span>
-              <span class="tech-badge">AWS</span>
-              <span class="tech-badge">Terraform</span>
-              <span class="tech-badge">CI/CD</span>
-              <span class="tech-badge">Python</span>
-              <span class="tech-badge">Bash</span>
-              <span class="tech-badge">Git</span>
-            </div>
-            <div style="margin-top: 3em">
-              <div class="btn btn-normal">
-                <a
-                  href="https://github.com/Salman-Moosa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn-click magnetic"
-                  data-strength="25"
-                  data-strength-text="15"
-                >
-                  <div class="btn-fill"></div>
-                  <span class="btn-text">
-                    <span class="btn-text-inner change"
-                      >View GitHub Projects</span
-                    >
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section class="skills-section" data-scroll-section="">
-          <div class="container">
-            <div class="skills-header once-in">
-              <h2>Skills & Expertise</h2>
-              <p>Technologies and tools I work with</p>
-            </div>
-            <div class="skills-grid">
-              <!-- Programming Languages -->
-              <div class="skill-category once-in">
-                <div class="skill-category-header">
-                  <h4>Programming Languages</h4>
+        <!-- Side-by-side collapsible sections -->
+        <div class="sections-grid" data-scroll-section="">
+          <!-- Skills Section - Collapsible -->
+          <section class="collapsible-section skills-section once-in expanded">
+            <div class="container">
+              <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header-content">
+                  <h2>Technical Expertise</h2>
+                  <p>Cloud, development & design</p>
                 </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">Java</span>
-                  <span class="skill-tag">Python</span>
-                  <span class="skill-tag">SQL</span>
-                  <span class="skill-tag">HTML</span>
-                  <span class="skill-tag">CSS</span>
-                  <span class="skill-tag">Bash</span>
-                  <span class="skill-tag">Shell Scripting</span>
+                <div class="collapsible-toggle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
                 </div>
               </div>
 
-              <!-- Cloud & DevOps -->
-              <div class="skill-category once-in">
-                <div class="skill-category-header">
-                  <h4>Cloud & DevOps</h4>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">AWS</span>
-                  <span class="skill-tag">DevOps Practices</span>
-                  <span class="skill-tag">Docker</span>
-                  <span class="skill-tag">CI/CD</span>
-                  <span class="skill-tag">Git</span>
-                  <span class="skill-tag">GitHub</span>
-                  <span class="skill-tag">CLI Commands</span>
-                  <span class="skill-tag">Scripting Techniques</span>
-                  <span class="skill-tag">Version Control</span>
-                </div>
-              </div>
+              <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                  <div class="collapsible-inner">
+                    <div class="skill-row">
+                      <span class="skill-row-label">Programming</span>
+                      <span class="skill-tag">Java</span>
+                      <span class="skill-tag">Python</span>
+                      <span class="skill-tag">SQL</span>
+                      <span class="skill-tag">HTML</span>
+                      <span class="skill-tag">CSS</span>
+                      <span class="skill-tag">Bash</span>
+                      <span class="skill-tag">Shell Scripting</span>
+                    </div>
 
-              <!-- Operating Systems -->
-              <div class="skill-category once-in">
-                <div class="skill-category-header">
-                  <h4>Operating Systems</h4>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">Windows</span>
-                  <span class="skill-tag">MacOS</span>
-                  <span class="skill-tag">Linux</span>
-                </div>
-              </div>
+                    <div class="skill-row">
+                      <span class="skill-row-label">Cloud & DevOps</span>
+                      <span class="skill-tag">AWS</span>
+                      <span class="skill-tag">Docker</span>
+                      <span class="skill-tag">CI/CD</span>
+                      <span class="skill-tag">Git</span>
+                      <span class="skill-tag">GitHub</span>
+                      <span class="skill-tag">Version Control</span>
+                      <span class="skill-tag">CLI</span>
+                    </div>
 
-              <!-- Software Engineering & Architecture -->
-              <div class="skill-category once-in">
-                <div class="skill-category-header">
-                  <h4>Software Engineering & Architecture</h4>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">OOP</span>
-                  <span class="skill-tag">SDLC</span>
-                  <span class="skill-tag">Design Patterns</span>
-                  <span class="skill-tag">Debugging</span>
-                  <span class="skill-tag">Code Reviews</span>
-                  <span class="skill-tag">Deployment</span>
-                  <span class="skill-tag">Cloud Development</span>
-                  <span class="skill-tag">Data Science Tools</span>
-                  <span class="skill-tag">IT Support</span>
-                  <span class="skill-tag">Monitoring Dashboards</span>
-                  <span class="skill-tag">Build Automation</span>
-                  <span class="skill-tag">Source Control</span>
-                </div>
-              </div>
+                    <div class="skill-row">
+                      <span class="skill-row-label">Systems</span>
+                      <span class="skill-tag">Windows</span>
+                      <span class="skill-tag">MacOS</span>
+                      <span class="skill-tag">Linux</span>
+                    </div>
 
-              <!-- Design and Visualization -->
-              <div class="skill-category once-in">
-                <div class="skill-category-header">
-                  <h4>Design & Visualization</h4>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">Figma</span>
-                  <span class="skill-tag">3Ds Max</span>
-                  <span class="skill-tag">Blender</span>
-                </div>
-              </div>
+                    <div class="skill-row">
+                      <span class="skill-row-label">Engineering</span>
+                      <span class="skill-tag">OOP</span>
+                      <span class="skill-tag">SDLC</span>
+                      <span class="skill-tag">Design Patterns</span>
+                      <span class="skill-tag">Code Reviews</span>
+                      <span class="skill-tag">Debugging</span>
+                      <span class="skill-tag">Deployment</span>
+                      <span class="skill-tag">Build Automation</span>
+                      <span class="skill-tag">Monitoring</span>
+                    </div>
 
-              <!-- Productivity Tools -->
-              <div class="skill-category once-in">
-                <div class="skill-category-header">
-                  <h4>Productivity Tools</h4>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">MS Excel</span>
-                  <span class="skill-tag">MS Word</span>
-                  <span class="skill-tag">Microsoft 365</span>
-                  <span class="skill-tag">Google Sheets</span>
-                  <span class="skill-tag">Google Docs</span>
+                    <div class="skill-row">
+                      <span class="skill-row-label">Design</span>
+                      <span class="skill-tag">Figma</span>
+                      <span class="skill-tag">3Ds Max</span>
+                      <span class="skill-tag">Blender</span>
+                    </div>
+
+                    <div class="skill-row">
+                      <span class="skill-row-label">Professional</span>
+                      <span class="skill-tag">Communication</span>
+                      <span class="skill-tag">Leadership</span>
+                      <span class="skill-tag">Team Collaboration</span>
+                      <span class="skill-tag">Project Management</span>
+                      <span class="skill-tag">Technical Documentation</span>
+                      <span class="skill-tag">Problem Solving</span>
+                      <span class="skill-tag">Adaptability</span>
+                    </div>
+
+                    <div class="skill-row">
+                      <span class="skill-row-label">Tools</span>
+                      <span class="skill-tag">MS Excel</span>
+                      <span class="skill-tag">MS Word</span>
+                      <span class="skill-tag">Microsoft 365</span>
+                      <span class="skill-tag">Google Sheets</span>
+                      <span class="skill-tag">Google Docs</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- Soft Skills Section -->
-        <section class="soft-skills-section" data-scroll-section="">
-          <div class="container">
-            <div class="soft-skills-header once-in">
-              <h3>Professional Skills</h3>
+          <!-- Projects Section - Collapsible -->
+          <section
+            class="collapsible-section projects-section once-in expanded"
+          >
+            <div class="container">
+              <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <div class="collapsible-header-content">
+                  <h2>Featured Work</h2>
+                  <p>Real-world implementations</p>
+                </div>
+                <div class="collapsible-toggle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                  <div class="collapsible-inner">
+                    <div class="projects-grid">
+                      <div class="project-card">
+                        <div class="project-card-image">
+                          <div class="project-card-image-text">
+                            Daily Todo
+                            <span>Full-Stack App</span>
+                          </div>
+                        </div>
+                        <div class="project-card-content">
+                          <h3 class="project-card-title">The Daily Todo</h3>
+                          <p class="project-card-description">
+                            A vintage newspaper-inspired task management app
+                            featuring containerized microservices architecture,
+                            automated CI/CD pipeline, RESTful API, and elegant
+                            light/dark theme toggle with reminder system.
+                          </p>
+                          <div class="project-card-tags">
+                            <span class="project-card-tag">Docker</span>
+                            <span class="project-card-tag">Docker Compose</span>
+                            <span class="project-card-tag">Node.js</span>
+                            <span class="project-card-tag">Express.js</span>
+                            <span class="project-card-tag">Nginx</span>
+                            <span class="project-card-tag">GitHub Actions</span>
+                            <span class="project-card-tag">CI/CD</span>
+                            <span class="project-card-tag">REST API</span>
+                          </div>
+                          <div class="project-card-links">
+                            <a
+                              href="https://github.com/Salman-Moosa/mytodo"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="project-card-link"
+                              onclick="event.stopPropagation()"
+                            >
+                              GitHub
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                              </svg>
+                            </a>
+                            <a
+                              href="#"
+                              class="project-card-link secondary"
+                              onclick="event.stopPropagation()"
+                            >
+                              Live Demo
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path
+                                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                                ></path>
+                              </svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- More Projects Coming -->
+                    <div class="projects-coming-soon">
+                      <div class="projects-coming-soon-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                          ></path>
+                        </svg>
+                      </div>
+                      <div class="projects-coming-soon-text">
+                        <h4>Building in Progress</h4>
+                        <p>
+                          New projects with Kubernetes & Terraform coming soon.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="soft-skills-grid once-in">
-              <span class="soft-skill-badge">Communication</span>
-              <span class="soft-skill-badge">Leadership</span>
-              <span class="soft-skill-badge">Team Collaboration</span>
-              <span class="soft-skill-badge">System Integration</span>
-              <span class="soft-skill-badge">Project Management</span>
-              <span class="soft-skill-badge">Technical Documentation</span>
-              <span class="soft-skill-badge">Troubleshooting</span>
-              <span class="soft-skill-badge">Issue Resolution</span>
-              <span class="soft-skill-badge">Analytical Thinking</span>
-              <span class="soft-skill-badge">Problem Solving</span>
-              <span class="soft-skill-badge">Adaptability</span>
-              <span class="soft-skill-badge">Quick Learner</span>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         <div class="footer-rounded-div" data-scroll-section="">
           <div class="rounded-div-wrap">
@@ -784,7 +1113,7 @@
                 <div class="flex-col">
                   <div class="credits">
                     <h5>Version</h5>
-                    <p>2025 © Edition</p>
+                    <p>2026 © Edition</p>
                   </div>
                 </div>
                 <div class="flex-col">
@@ -838,5 +1167,30 @@
     <script src="js/lazyload.min.js"></script>
     <script src="js/locomotive-scroll.min.js"></script>
     <script defer="" src="js/index-new.js"></script>
+    <script>
+      function toggleCollapsible(header) {
+        const section = header.closest(".collapsible-section");
+
+        section.classList.toggle("expanded");
+
+        // Update locomotive scroll to recalculate page height after content changes
+        const updateScroll = () => {
+          // The scroll instance is stored in 'scroll' variable in index-new.js
+          if (typeof scroll !== "undefined" && scroll && scroll.update) {
+            scroll.update();
+          }
+          // Also refresh ScrollTrigger to recalculate positions
+          if (typeof ScrollTrigger !== "undefined" && ScrollTrigger.refresh) {
+            ScrollTrigger.refresh();
+          }
+        };
+
+        // Update multiple times during and after animation to ensure scroll recalculates
+        setTimeout(updateScroll, 50);
+        setTimeout(updateScroll, 200);
+        setTimeout(updateScroll, 400);
+        setTimeout(updateScroll, 600);
+      }
+    </script>
   </body>
 </html>

@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>404 - Page Not Found • Salman Moosa</title>
     <meta name="description" content="Page not found - Salman Moosa" />
     <meta property="og:title" content="404 - Page Not Found • Salman Moosa" />
@@ -50,7 +47,6 @@
   </head>
 
   <body data-barba="wrapper">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="no-scroll-overlay"></div>
     <div class="loading-container">
       <div class="loading-screen">
@@ -98,7 +94,14 @@
       data-barba="container"
       data-barba-namespace="error"
     >
-      <div class="btn btn-hamburger" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false" aria-controls="fixed-nav">
+      <div
+        class="btn btn-hamburger"
+        role="button"
+        tabindex="0"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="fixed-nav"
+      >
         <div
           class="btn-click magnetic"
           data-strength="50"
@@ -112,7 +115,13 @@
         </div>
       </div>
       <div class="overlay fixed-nav-back"></div>
-      <div class="fixed-nav theme-dark" id="fixed-nav" role="dialog" aria-modal="true" aria-label="Site navigation">
+      <div
+        class="fixed-nav theme-dark"
+        id="fixed-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+      >
         <div class="fixed-nav-rounded-div">
           <div class="rounded-div-wrap">
             <div class="rounded-div"></div>
@@ -175,7 +184,12 @@
           </div>
         </div>
       </div>
-      <div class="main-wrap" id="main-content" data-scroll-container="" tabindex="-1">
+      <div
+        class="main-wrap"
+        id="main-content"
+        data-scroll-container=""
+        tabindex="-1"
+      >
         <header
           class="section default-header error-header theme-dark"
           data-scroll-section=""
@@ -190,14 +204,7 @@
                   data-strength-text="10"
                 >
                   <span class="btn-text">
-                    <div class="credit"><span>©</span></div>
-                    <div class="cbd">
-                      <span class="code-by">Code by </span>
-                      <span class="salman">
-                        <span class="salman-span"> Salman</span>
-                        <span class="moosa">Moosa</span>
-                      </span>
-                    </div>
+                    <span class="btn-text-inner">Home</span>
                   </span>
                 </a>
               </div>
@@ -300,7 +307,32 @@
                 </div>
               </div>
             </div>
-            <div class="row once-in">
+
+            <!-- Main error message -->
+            <div class="row once-in error-message-row">
+              <div class="flex-col" style="width: 100%; max-width: 42em">
+                <p
+                  class="error-main-text"
+                  style="
+                    color: var(--color-gray);
+                    font-size: 1.1em;
+                    line-height: 1.7;
+                    margin-bottom: 1.5em;
+                  "
+                >
+                  Well, this is awkward. The page you're looking for doesn't
+                  exist. It's not you, it's me. I broke something while trying
+                  to "improve" things. Let's get you back home before we both
+                  start overthinking this.
+                </p>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div
+              class="row once-in"
+              style="gap: 1em; flex-wrap: wrap; margin-bottom: 2.5em"
+            >
               <div class="flex-col" style="position: relative; z-index: 5">
                 <div
                   class="btn btn-normal"
@@ -319,6 +351,91 @@
                   </a>
                 </div>
               </div>
+              <div class="flex-col" style="position: relative; z-index: 5">
+                <div
+                  class="btn btn-normal btn-outline"
+                  style="border-radius: 2em; min-width: 10em"
+                >
+                  <a
+                    href="contact.html?subject=Broken%20Link%20Report"
+                    class="btn-click magnetic"
+                    data-strength="40"
+                    data-strength-text="20"
+                  >
+                    <div class="btn-fill"></div>
+                    <span class="btn-text">
+                      <span class="btn-text-inner">Report Issue</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Curious section -->
+            <div class="row once-in curious-section">
+              <div class="flex-col" style="width: 100%">
+                <div
+                  class="curious-trigger"
+                  id="curiousTrigger"
+                  role="button"
+                  tabindex="0"
+                  aria-expanded="false"
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5em;
+                    cursor: pointer;
+                    color: var(--color-gray);
+                    font-size: 0.9em;
+                    transition: color 0.3s ease;
+                  "
+                >
+                  <span class="curious-label" id="curiousLabel"
+                    >Still here? Curious, aren't you?</span
+                  >
+                  <svg
+                    class="curious-arrow"
+                    id="curiousArrow"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style="transition: transform 0.3s ease"
+                  >
+                    <path
+                      d="M2 4L6 8L10 4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="curious-content"
+                  id="curiousContent"
+                  style="
+                    max-height: 0;
+                    overflow: hidden;
+                    transition: max-height 0.5s ease, opacity 0.3s ease;
+                    opacity: 0;
+                  "
+                >
+                  <p
+                    id="curiousMessage"
+                    style="
+                      color: var(--color-gray);
+                      font-size: 0.95em;
+                      line-height: 1.8;
+                      margin-top: 1.5em;
+                      max-width: 48em;
+                      padding-left: 0.5em;
+                      border-left: 2px solid var(--color-gray);
+                    "
+                  ></p>
+                </div>
+              </div>
             </div>
           </div>
         </header>
@@ -331,17 +448,18 @@
               <div class="flex-col">
                 <div class="credits">
                   <h5>Version</h5>
-                  <p>2025 © Edition</p>
+                  <p>2026 © Edition</p>
                 </div>
               </div>
               <div class="flex-col">
-                  <div class="socials">
+                <div class="socials">
                   <h5>Socials</h5>
                   <ul>
                     <li class="btn btn-link btn-link-external">
                       <a
                         href="https://www.linkedin.com/in/salman-moosa/"
-                        target="_blank" rel="noopener noreferrer"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="btn-click magnetic"
                         data-strength="20"
                         data-strength-text="10"
@@ -354,7 +472,8 @@
                     <li class="btn btn-link btn-link-external">
                       <a
                         href="https://github.com/Salman-Moosa"
-                        target="_blank" rel="noopener noreferrer"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="btn-click magnetic"
                         data-strength="20"
                         data-strength-text="10"
@@ -381,5 +500,136 @@
     <script src="js/lazyload.min.js"></script>
     <script src="js/locomotive-scroll.min.js"></script>
     <script defer src="js/index-new.js"></script>
+
+    <!-- 404 Curious Section Script -->
+    <script>
+      (function () {
+        const curiousMessages = [
+          {
+            label: "Still here? Okay, I'll level with you...",
+            content: `I once read that most people flee a 404 page in under three seconds. You're still here. That means you're either incredibly patient, deeply bored, or you have that rare itch to see what happens if you just... keep reading. I'm the same way. I once read the entire terms of service for a video game just because it felt wrong not to.
+
+Anyway, this page disappeared because I got ambitious. It was 2 AM. I thought, "What if I reorganize my entire site structure? How hard could it be?" Famous last words. A few misplaced folders later, and here we are. You, me, and a URL that points to digital nothingness. Let's call it a bonding moment. Click back to safety whenever you're ready I'll be here, nursing my regrets and a truly questionable git history.`,
+          },
+          {
+            label: "Still here? Alright, I'll confess...",
+            content: `Most folks see a 404 and vanish like they just walked into the wrong party. But not you. You're still here, reading, which either means you're very curious or you accidentally leaned on your spacebar. Either way, welcome.
+
+Here's what happened: I got a wild hair to "clean things up." Renamed a folder. Moved some files. Thought I was being tidy. Instead, I created this little pocket of internet limbo. You found it. Congratulations, you're now a digital archaeologist. This URL used to mean something. Now it's just us, this paragraph, and my quietly bruised pride. Let's get you back to civilization, shall we?`,
+          },
+          {
+            label: "Oh, you're still reading? Let me explain...",
+            content: `The average person spends less time on a 404 page than it takes to tie a shoe. You're still here. That tells me you're either procrastinating beautifully, or you're the kind of person who finishes things. I respect that. I'm the guy who watches the last ten minutes of a bad movie just to see how it ends.
+
+This page vanished because I got overconfident. Decided to refactor my site at midnight after one too many cups of coffee. "It'll be clean," I said. "Streamlined," I said. Now it's just... gone. You found the hole I left behind. Thanks for keeping me company in it. Hit that back button when you're done pitying me. I'll be fine. Probably.`,
+          },
+          {
+            label: "You're still here? Man. Okay, real talk...",
+            content: `Three seconds. That's the average lifespan of someone's attention on a 404 page. You've blown past that like it's a speed limit. Either you're very patient, very lost, or you have that rare gene that makes you finish what you start. I'm betting on the last one. You're the person who reads the last page of a book even when you know how it ends.
+
+So here's the truth: this page died of good intentions. I was trying to make things better. Cleaner URLs, better structure, a more "professional" site. Instead, I made this. A dead end. A digital shrug. You deserve better. I deserve a nap. Let's get you back to somewhere that actually functions, yeah?`,
+          },
+          {
+            label: "Still reading? I'll be honest with you...",
+            content: `Most people treat a 404 like a stop sign see it, turn around, forget it ever happened. But you're still here. That means you're either deeply curious, wonderfully stubborn, or you fell asleep with your thumb on the scroll wheel. All three are valid.
+
+This page disappeared thanks to a classic case of "improvement fever." I wanted things to be perfect. Renamed a folder, moved some assets, felt like a genius. Now it's just... this. You and me, standing in the URL equivalent of a vacant lot. I appreciate you sticking around. It makes the whole mistake feel slightly less lonely. Now let's get you back to the main road before we both start questioning our life choices.`,
+          },
+          {
+            label: "Still here? Wow. Alright, let's talk...",
+            content: `I just looked up the analytics most people vanish from a 404 page faster than free pizza at a meetup. But you're... still reading. That's either beautiful patience or a truly impressive level of procrastination. Either way, welcome.
+
+This page died because I got ambitious at 1:47 AM. I thought, "What if I made my URLs prettier?" Tragically, I forgot to ask the old URLs how they felt about being moved. They left in protest. You just walked into the empty apartment. The Wi-Fi still works, but that's about it. Let's get you back to the part of the site that has actual furniture.`,
+          },
+          {
+            label: "You're still here? Okay, you asked for it...",
+            content: `Most folks treat a 404 like a stop sign see it, bounce, move on. You're treating it like a scenic overlook. I respect that. You're the person who reads the plaque.
+
+Here's the deal: I broke this page while "streamlining" my site, which is a fancy word for "renaming folders at midnight while barely awake." The URL you're holding? It's a map to a place that doesn't exist anymore. Like a digital Atlantis, but with less mystery and more "oops." Thanks for keeping me company in the ruins. Now let's go find you a working page before we both start feeling nostalgic for 2003.`,
+          },
+          {
+            label: "Still reading? I admire your commitment...",
+            content: `Three seconds. That's how long the average person tolerates a 404. You've spent longer reading this sentence. That tells me you're either deeply curious, wonderfully stubborn, or you just really like reading things you're not supposed to.
+
+This page vanished because I got overconfident. I thought I could reorganize my entire site architecture without breaking a single link. Reader, I could not. I am the architect of my own disappointment. You just found the crack in the foundation. For what it's worth, you're not the first. But you might be the most patient. Let's get you somewhere stable.`,
+          },
+          {
+            label: "Oh, you're still here? Let me grab coffee...",
+            content: `This is impressive. Most people see a 404 and leave like they just opened a door to the wrong surprise party. You? You're still here, reading every word like I'm about to reveal the meaning of life. Spoiler: I'm not. I will reveal why you're here, though.
+
+I did this. Me. It was late. I thought, "I'll just move a few folders, it'll be fine." It was not fine. This URL is now a digital ghost town, and you're the tourist who stopped to read the historical marker. I'm the historical figure who regrets everything. Let's get you back to civilization before we both develop a complex.`,
+          },
+          {
+            label: "Still here? You're either brave or very lost...",
+            content: `Most folks spend less time on a 404 than they do tying their shoes. You've committed. That either means you're the kind of person who finishes what they start, or you got here and thought, "Huh, I wonder how weird this gets." The answer: reasonably weird.
+
+This page is missing because I got ambitious. Decided the site needed a "fresh look," which somehow involved nuking this page's URL from orbit. It seemed smart at the time. It was not. Now it's just you, me, and a URL that leads nowhere. Welcome to my personal limbo. Your patience is noted and appreciated. Now let's go somewhere that works.`,
+          },
+          {
+            label: "You're still scrolling? Man, I love you for that...",
+            content: `The average human gives a 404 page about as much attention as a parking ticket. You're still here. That means you're either procrastinating at a masterful level, or you're genuinely interested in why things break. Either way, we're kindred spirits.
+
+This page broke because I tried to "optimize." That's developer-speak for "I touched something that was working and now it's not." I moved a folder. I renamed a thing. I was so sure I'd updated every link. I had not. You found the one I missed. Thanks for that. Let's get you to a page that isn't a reminder of my overconfidence.`,
+          },
+          {
+            label: "Still here? I'll tell you what happened...",
+            content: `Most people bounce from a 404 faster than a bad date. You're lingering. That tells me you're either very curious or you've mastered the art of procrastination. I respect both.
+
+This page vanished because I had a late-night idea to reorganize everything. I wanted cleaner URLs, a tidier file structure, a more "professional" site. Instead, I created this dead end. You found it. You're like the archaeologist who discovered a room the architect forgot to mention. It's not a treasure. It's just a mistake. But thanks for digging. Now let's get you back to the part of the site that actually functions.`,
+          },
+        ];
+
+        // Select random message on page load
+        const randomIndex = Math.floor(Math.random() * curiousMessages.length);
+        const selectedMessage = curiousMessages[randomIndex];
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const trigger = document.getElementById("curiousTrigger");
+          const content = document.getElementById("curiousContent");
+          const arrow = document.getElementById("curiousArrow");
+          const label = document.getElementById("curiousLabel");
+          const message = document.getElementById("curiousMessage");
+
+          if (trigger && content && message && label) {
+            // Set the random message
+            label.textContent = selectedMessage.label;
+            message.textContent = selectedMessage.content;
+
+            let isExpanded = false;
+
+            function toggleCurious() {
+              isExpanded = !isExpanded;
+              trigger.setAttribute("aria-expanded", isExpanded);
+
+              if (isExpanded) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.opacity = "1";
+                arrow.style.transform = "rotate(180deg)";
+              } else {
+                content.style.maxHeight = "0";
+                content.style.opacity = "0";
+                arrow.style.transform = "rotate(0deg)";
+              }
+            }
+
+            trigger.addEventListener("click", toggleCurious);
+            trigger.addEventListener("keydown", function (e) {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggleCurious();
+              }
+            });
+
+            // Hover effect
+            trigger.addEventListener("mouseenter", function () {
+              this.style.color = "var(--color-white)";
+            });
+            trigger.addEventListener("mouseleave", function () {
+              this.style.color = "var(--color-gray)";
+            });
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
