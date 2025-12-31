@@ -4153,13 +4153,28 @@ textarea:-webkit-autofill:active {
 
 .about-hero-title .title-line {
   display: block;
-  overflow: hidden;
+  overflow: visible;
+  white-space: nowrap;
 }
 
-.about-hero-title .title-line:nth-child(1) {
+.about-hero-title .title-line-1 {
   opacity: 0.6;
 }
 
-.about-hero-title .title-line:nth-child(2) {
+.about-hero-title .title-line-2 {
   opacity: 1;
+}
+
+/* Hover Scale Micro-interaction */
+.hover-scale {
+  display: inline !important;
+  cursor: pointer;
+  font-size: 1em;
+  transition: font-size 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    color 0.3s ease;
+}
+
+.hover-scale:hover {
+  font-size: 1.15em;
+  color: var(--color-blue);
 }

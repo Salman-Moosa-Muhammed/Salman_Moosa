@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>THE DAILY TODO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Light theme (default) */
+        --ink: #1a1a1a;
+        --ink-light: #3a3a3a;
+        --paper: #f5f0e8;
+        --paper-bright: #fffdf9;
+        --paper-dark: #e8e0d0;
+        --coral: #e85d4c;
+        --coral-dark: #c94a3a;
+        --coral-glow: rgba(232, 93, 76, 0.12);
+        --sage: #4a6741;
+        --sage-light: #5a7a51;
+        --muted: #8b8680;
+        --rule: #c9c3b8;
+        --gold: #c9a227;
+        --accent: #8b7355;
+      }
+
+      [data-theme="dark"] {
+        /* Dark book theme */
+        --ink: #e8e4dc;
+        --ink-light: #b8b4ac;
+        --paper: #1a1915;
+        --paper-bright: #252420;
+        --paper-dark: #121210;
+        --coral: #e85d4c;
+        --coral-dark: #c94a3a;
+        --coral-glow: rgba(232, 93, 76, 0.15);
+        --sage: #6b9960;
+        --sage-light: #7fb572;
+        --muted: #6b675f;
+        --rule: #3a3630;
+        --gold: #d4a824;
+        --accent: #8b7355;
+      }
+
+      /* Theme toggle switch */
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        animation: fadeSlideIn 0.6s ease-out 0.3s backwards;
+      }
+
+      .theme-toggle-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--muted);
+      }
+
+      .theme-switch {
+        position: relative;
+        width: 48px;
+        height: 26px;
+        background: var(--rule);
+        border-radius: 13px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        padding: 0;
+      }
+
+      .theme-switch::before {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 20px;
+        height: 20px;
+        background: var(--paper-bright);
+        border-radius: 50%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .theme-switch.dark {
+        background: var(--gold);
+      }
+
+      .theme-switch.dark::before {
+        transform: translateX(22px);
+      }
+
+      .theme-switch-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 14px;
+        height: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .theme-switch-icon.sun {
+        left: 6px;
+        opacity: 1;
+      }
+
+      .theme-switch-icon.moon {
+        right: 6px;
+        opacity: 0.5;
+      }
+
+      .theme-switch.dark .sun {
+        opacity: 0.5;
+      }
+
+      .theme-switch.dark .moon {
+        opacity: 1;
+      }
+
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeSlideOut {
+        from {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(30px) scale(0.95);
+        }
+      }
+
+      @keyframes popIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        70% {
+          transform: scale(1.05);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes checkmark {
+        0% {
+          stroke-dashoffset: 24;
+        }
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes stampIn {
+        0% {
+          transform: scale(2) rotate(-15deg);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(0.9) rotate(3deg);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-4px);
+        }
+        40% {
+          transform: translateX(4px);
+        }
+        60% {
+          transform: translateX(-4px);
+        }
+        80% {
+          transform: translateX(4px);
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "JetBrains Mono", monospace;
+        background: var(--paper);
+        /* Dark leather book texture */
+        background-image: radial-gradient(
+            ellipse at 50% 0%,
+            rgba(139, 115, 85, 0.08) 0%,
+            transparent 50%
+          ),
+          url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+        min-height: 100vh;
+        padding: 40px 20px;
+        color: var(--ink);
+        position: relative;
+      }
+
+      /* Middle line removed for cleaner UI */
+
+      .container {
+        max-width: 620px;
+        margin: 0 auto;
+        animation: fadeSlideIn 0.8s ease-out;
+      }
+
+      .masthead {
+        text-align: center;
+        border-bottom: 3px double var(--ink);
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        animation: fadeSlideIn 0.6s ease-out;
+      }
+
+      .date-line {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      h1 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-weight: 900;
+        letter-spacing: -1px;
+        line-height: 1;
+        margin-bottom: 8px;
+        cursor: default;
+        transition: letter-spacing 0.3s ease;
+      }
+
+      h1:hover {
+        letter-spacing: 2px;
+      }
+
+      .tagline {
+        font-family: "Playfair Display", Georgia, serif;
+        font-style: italic;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        animation: fadeSlideIn 0.7s ease-out 0.1s backwards;
+      }
+
+      .status-bar {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--ink);
+        color: var(--paper);
+        padding: 6px 14px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--coral);
+        animation: blink 1s step-end infinite;
+      }
+
+      .status-bar.connected .status-dot {
+        background: var(--sage);
+        animation: none;
+      }
+
+      .todo-count {
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: var(--muted);
+        padding: 6px 12px;
+        border: 1px solid var(--rule);
+        background: var(--paper-bright);
+      }
+
+      .todo-count strong {
+        color: var(--coral);
+        font-weight: 700;
+      }
+
+      .error {
+        background: var(--coral);
+        color: var(--paper);
+        padding: 12px 16px;
+        font-size: 12px;
+        margin-bottom: 20px;
+        border-left: 4px solid var(--ink);
+        animation: stampIn 0.4s ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .error-close {
+        background: none;
+        border: none;
+        color: var(--paper);
+        cursor: pointer;
+        font-size: 18px;
+        padding: 0 4px;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+
+      .error-close:hover {
+        opacity: 1;
+      }
+
+      .add-form {
+        display: flex;
+        gap: 0;
+        margin-bottom: 30px;
+        animation: fadeSlideIn 0.8s ease-out 0.2s backwards;
+        position: relative;
+      }
+
+      #todoInput {
+        flex: 1;
+        padding: 16px 20px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        border: 2px solid var(--ink);
+        border-right: none;
+        background: var(--paper);
+        color: var(--ink);
+        transition: all 0.2s;
+      }
+
+      #todoInput::placeholder {
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      #todoInput:focus {
+        outline: none;
+        background: var(--paper-bright);
+        box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+
+      .reminder-wrapper {
+        display: flex;
+        align-items: center;
+        background: var(--paper-bright);
+        border: 2px solid var(--rule);
+        border-left: none;
+        border-right: none;
+        padding: 0 12px;
+        gap: 8px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        min-width: 50px;
+      }
+
+      .reminder-wrapper:focus-within {
+        background: var(--paper-bright);
+        border-color: var(--gold);
+      }
+
+      .reminder-wrapper.has-value {
+        background: rgba(201, 162, 39, 0.1);
+        border-color: var(--gold);
+      }
+
+      .reminder-icon {
+        cursor: pointer;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .reminder-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: var(--muted);
+        fill: none;
+        stroke-width: 1.5;
+        transition: all 0.3s ease;
+      }
+
+      .reminder-wrapper:hover .reminder-icon svg,
+      .reminder-wrapper.has-value .reminder-icon svg {
+        stroke: var(--gold);
+        opacity: 1;
+      }
+
+      .reminder-input {
+        padding: 16px 0;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        border: none;
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        width: 0;
+        opacity: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .reminder-wrapper.has-value .reminder-input {
+        pointer-events: auto;
+      }
+
+      .reminder-input:focus {
+        outline: none;
+      }
+
+      .reminder-input::-webkit-calendar-picker-indicator {
+        display: none;
+      }
+
+      .reminder-preview {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--gold);
+        white-space: nowrap;
+        letter-spacing: 0.5px;
+      }
+
+      .reminder-clear {
+        background: var(--muted);
+        color: var(--paper);
+        border: none;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        flex-shrink: 0;
+        opacity: 0.7;
+      }
+
+      .reminder-clear:hover {
+        background: var(--coral);
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      .reminder-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: linear-gradient(135deg, var(--gold), #d4a824);
+        color: var(--paper);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 4px 10px;
+        border-radius: 12px;
+        margin-left: 10px;
+        box-shadow: 0 2px 6px rgba(201, 162, 39, 0.3);
+        transition: all 0.2s;
+      }
+
+      .reminder-badge:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(201, 162, 39, 0.4);
+      }
+
+      .reminder-badge.past {
+        background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+        box-shadow: 0 2px 6px rgba(232, 93, 76, 0.3);
+        text-decoration: line-through;
+        opacity: 0.8;
+      }
+
+      .reminder-badge.soon {
+        background: linear-gradient(135deg, var(--sage), var(--sage-light));
+        box-shadow: 0 2px 6px rgba(74, 103, 65, 0.3);
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+
+      /* Pin button styles */
+      .pin-btn {
+        background: transparent;
+        border: 1px solid transparent;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 4px;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pin-btn:hover {
+        background: rgba(201, 162, 39, 0.1);
+        border-color: var(--gold);
+      }
+
+      .pin-btn svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--muted);
+        fill: none;
+        stroke-width: 2;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: rotate(45deg);
+      }
+
+      .pin-btn:hover svg {
+        stroke: var(--gold);
+      }
+
+      .pin-btn.pinned svg {
+        stroke: var(--gold);
+        fill: var(--gold);
+      }
+
+      .todo-item.pinned {
+        background: rgba(201, 162, 39, 0.06);
+        border-left: 3px solid var(--gold);
+        padding-left: 12px;
+        margin-left: -15px;
+        border-radius: 0 4px 4px 0;
+      }
+
+      /* Improved delete button */
+      .delete-btn {
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 6px;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .delete-btn:hover {
+        background: rgba(232, 93, 76, 0.1);
+        border-color: var(--coral);
+      }
+
+      .delete-btn svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--muted);
+        fill: none;
+        stroke-width: 2;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .delete-btn:hover svg {
+        stroke: var(--coral);
+      }
+
+      .add-btn {
+        padding: 16px 28px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background: var(--ink);
+        color: var(--paper);
+        border: 2px solid var(--ink);
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .add-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gold);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .add-btn span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .add-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .add-btn:hover::before {
+        transform: scaleX(1);
+      }
+
+      .add-btn:active {
+        transform: translateY(0);
+      }
+
+      .add-btn.loading {
+        pointer-events: none;
+      }
+
+      .add-btn.loading span {
+        opacity: 0.5;
+      }
+
+      .keyboard-hint {
+        position: absolute;
+        right: -60px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 10px;
+        color: var(--muted);
+        opacity: 0;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+
+      .add-form:focus-within .keyboard-hint {
+        opacity: 1;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+        animation: fadeSlideIn 0.8s ease-out 0.3s backwards;
+      }
+
+      .section-header::before,
+      .section-header::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--ink);
+      }
+
+      .section-title {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+
+      .todo-list {
+        background: transparent;
+        animation: fadeSlideIn 0.8s ease-out 0.4s backwards;
+        min-height: 100px;
+      }
+
+      .todo-item {
+        display: flex;
+        align-items: center;
+        padding: 14px 0;
+        transition: all 0.25s ease;
+        animation: fadeSlideIn 0.4s ease-out backwards;
+        position: relative;
+        gap: 12px;
+      }
+
+      .todo-item:not(:last-child) {
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .todo-item.removing {
+        animation: fadeSlideOut 0.3s ease forwards;
+      }
+
+      .todo-item.completed {
+        opacity: 0.5;
+      }
+
+      .todo-item.completed .todo-text {
+        text-decoration: line-through;
+        color: var(--muted);
+      }
+
+      .todo-checkbox {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--ink);
+        border-radius: 3px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        flex-shrink: 0;
+        background: var(--paper-bright);
+      }
+
+      .todo-checkbox:hover {
+        border-color: var(--sage);
+        background: rgba(74, 103, 65, 0.1);
+      }
+
+      .todo-checkbox.checked {
+        background: var(--sage);
+        border-color: var(--sage);
+      }
+
+      .todo-checkbox svg {
+        width: 12px;
+        height: 12px;
+        stroke: var(--paper);
+        stroke-width: 3;
+        fill: none;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+
+      .todo-checkbox.checked svg {
+        opacity: 1;
+      }
+
+      .todo-checkbox.checked svg path {
+        stroke-dasharray: 24;
+        animation: checkmark 0.3s ease forwards;
+      }
+
+      .todo-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+      }
+
+      .todo-text {
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--ink);
+        word-break: break-word;
+        transition: all 0.2s;
+      }
+
+      .todo-meta {
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.5px;
+      }
+
+      .todo-actions {
+        display: flex;
+        gap: 4px;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+
+      .todo-item:hover .todo-actions {
+        opacity: 1;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--muted);
+        font-style: italic;
+        position: relative;
+        animation: fadeSlideIn 0.5s ease-out;
+      }
+
+      .empty-state-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+        opacity: 0.3;
+        display: block;
+      }
+
+      .empty-state-text {
+        margin-bottom: 8px;
+      }
+
+      .empty-state-hint {
+        font-size: 11px;
+        color: var(--rule);
+        font-style: normal;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--rule);
+        border-top-color: var(--ink);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid var(--rule);
+        animation: fadeSlideIn 1s ease-out 0.5s backwards;
+      }
+
+      .footer-text {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .edition-badge {
+        display: inline-block;
+        background: var(--coral);
+        color: var(--paper);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 4px 10px;
+        margin-top: 12px;
+        transition: transform 0.2s, background 0.2s;
+        cursor: default;
+      }
+
+      .edition-badge:hover {
+        transform: scale(1.05);
+        background: var(--coral-dark);
+      }
+
+      /* Toast notifications */
+      .toast-container {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .toast {
+        background: var(--ink);
+        color: var(--paper);
+        padding: 12px 20px;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        border-left: 3px solid var(--sage);
+        animation: popIn 0.3s ease-out;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .toast.error {
+        border-left-color: var(--coral);
+      }
+
+      .toast.removing {
+        animation: fadeSlideOut 0.3s ease forwards;
+      }
+
+      /* Stagger animations for todo items */
+      .todo-item:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .todo-item:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .todo-item:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+      .todo-item:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+      .todo-item:nth-child(5) {
+        animation-delay: 0.25s;
+      }
+      .todo-item:nth-child(6) {
+        animation-delay: 0.3s;
+      }
+      .todo-item:nth-child(7) {
+        animation-delay: 0.35s;
+      }
+      .todo-item:nth-child(8) {
+        animation-delay: 0.4s;
+      }
+
+      /* Focus visible for accessibility */
+      button:focus-visible,
+      input:focus-visible {
+        outline: 2px solid var(--coral);
+        outline-offset: 2px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 640px) {
+        .keyboard-hint {
+          display: none;
+        }
+        .todo-actions {
+          opacity: 1;
+        }
+        .toolbar {
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+      <span class="theme-toggle-label">Theme</span>
+      <button
+        class="theme-switch"
+        id="themeSwitch"
+        onclick="toggleTheme()"
+        aria-label="Toggle theme"
+      >
+        <svg
+          class="theme-switch-icon sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="5" />
+          <path
+            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+          />
+        </svg>
+        <svg
+          class="theme-switch-icon moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="container">
+      <header class="masthead">
+        <div class="date-line" id="dateDisplay"></div>
+        <h1>THE DAILY TODO</h1>
+        <p class="tagline">"All the tasks that are fit to complete"</p>
+      </header>
+
+      <div class="toolbar">
+        <div class="status-bar" id="statusBar">
+          <span class="status-dot"></span>
+          <span>Connecting...</span>
+        </div>
+        <div class="todo-count" id="todoCount">
+          <strong>0</strong> items pending
+        </div>
+      </div>
+
+      <div id="errorMessage" class="error" style="display: none">
+        <span id="errorText"></span>
+        <button class="error-close" onclick="hideError()">×</button>
+      </div>
+
+      <form class="add-form" id="addForm" onsubmit="addTodo(event)">
+        <input
+          type="text"
+          id="todoInput"
+          placeholder="What's on the docket today?"
+          autocomplete="off"
+          maxlength="200"
+        />
+        <div class="reminder-wrapper" id="reminderWrapper">
+          <span
+            class="reminder-icon"
+            onclick="document.getElementById('reminderInput').showPicker()"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 3" /></svg
+          ></span>
+          <input
+            type="datetime-local"
+            id="reminderInput"
+            class="reminder-input"
+            title="Set reminder time (optional)"
+            onchange="updateReminderPreview()"
+          />
+          <span class="reminder-preview" id="reminderPreview"></span>
+          <button
+            type="button"
+            class="reminder-clear"
+            id="reminderClear"
+            onclick="clearReminder()"
+            style="display: none"
+          >
+            <svg viewBox="0 0 24 24" width="10" height="10">
+              <path
+                d="M18 6L6 18M6 6l12 12"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              />
+            </svg>
+          </button>
+        </div>
+        <button type="submit" class="add-btn" id="addBtn">
+          <span>File</span>
+        </button>
+        <span class="keyboard-hint">⏎ Enter</span>
+      </form>
+
+      <div class="section-header">
+        <span class="section-title">Active Items</span>
+      </div>
+
+      <div class="todo-list" id="todoList">
+        <div class="loading">
+          <span class="loading-spinner"></span>Fetching the latest...
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p class="footer-text">Published by Salman</p>
+      </footer>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+      // Theme toggle
+      function initTheme() {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+        const themeSwitch = document.getElementById("themeSwitch");
+        if (savedTheme === "dark") {
+          themeSwitch.classList.add("dark");
+        }
+      }
+
+      function toggleTheme() {
+        const html = document.documentElement;
+        const themeSwitch = document.getElementById("themeSwitch");
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+
+        if (newTheme === "dark") {
+          themeSwitch.classList.add("dark");
+        } else {
+          themeSwitch.classList.remove("dark");
+        }
+      }
+
+      // Initialize theme immediately
+      initTheme();
+
+      // LocalStorage-based storage (no backend needed)
+      const STORAGE_KEY = "dailyTodo_todos";
+
+      // Load todos from localStorage
+      let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+      // Initialize with default todos if empty
+      if (todos.length === 0) {
+        todos = [
+          {
+            id: 1,
+            text: "Learn Something",
+            completed: false,
+            createdAt: new Date().toISOString(),
+            reminderTime: null,
+          },
+          {
+            id: 2,
+            text: "Buy apple",
+            completed: false,
+            createdAt: new Date().toISOString(),
+            reminderTime: null,
+          },
+        ];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+      }
+
+      let nextId = Math.max(...todos.map((t) => t.id), 0) + 1;
+
+      // Save todos to localStorage
+      function saveTodos() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+      }
+
+      let completedTodos = new Set(
+        JSON.parse(localStorage.getItem("completedTodos") || "[]")
+      );
+      let pinnedTodos = new Set(
+        JSON.parse(localStorage.getItem("pinnedTodos") || "[]")
+      );
+
+      // Reminder input preview functions
+      function updateReminderPreview() {
+        const input = document.getElementById("reminderInput");
+        const preview = document.getElementById("reminderPreview");
+        const clearBtn = document.getElementById("reminderClear");
+        const wrapper = document.getElementById("reminderWrapper");
+
+        if (input.value) {
+          const date = new Date(input.value);
+          const options = {
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          };
+          preview.textContent = date.toLocaleDateString("en-US", options);
+          clearBtn.style.display = "flex";
+          wrapper.classList.add("has-value");
+        } else {
+          preview.textContent = "";
+          clearBtn.style.display = "none";
+          wrapper.classList.remove("has-value");
+        }
+      }
+
+      // Set default reminder time (1 hour from now)
+      function setDefaultReminderTime() {
+        const input = document.getElementById("reminderInput");
+        const now = new Date();
+        now.setHours(now.getHours() + 1);
+        now.setMinutes(0, 0, 0); // Round to the hour
+
+        // Format for datetime-local input (YYYY-MM-DDTHH:MM)
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+
+        input.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+        input.min = new Date().toISOString().slice(0, 16); // Prevent past dates
+        updateReminderPreview();
+      }
+
+      function clearReminder() {
+        const input = document.getElementById("reminderInput");
+        input.value = "";
+        updateReminderPreview();
+      }
+
+      // Set the date display
+      function setDateDisplay() {
+        const now = new Date();
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        document.getElementById("dateDisplay").textContent = now
+          .toLocaleDateString("en-US", options)
+          .toUpperCase();
+      }
+      setDateDisplay();
+
+      // Toast notification system
+      function showToast(message, isError = false) {
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.className = `toast${isError ? " error" : ""}`;
+        toast.innerHTML = `<span>${message}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.add("removing");
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+
+      // Update todo count
+      function updateTodoCount() {
+        const activeCount = todos.filter(
+          (t) => !completedTodos.has(t.id)
+        ).length;
+        document.getElementById(
+          "todoCount"
+        ).innerHTML = `<strong>${activeCount}</strong> item${
+          activeCount !== 1 ? "s" : ""
+        } pending`;
+      }
+
+      // Fetch and display all todos (from localStorage)
+      async function fetchTodos() {
+        try {
+          // Load from localStorage
+          todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+          // Sort by createdAt descending (latest first)
+          todos.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+          renderTodos(todos);
+          updateStatus("Ready", true);
+          updateTodoCount();
+          hideError();
+        } catch (error) {
+          console.error("Error loading todos:", error);
+          updateStatus("Error", false);
+          showError("Could not load tasks from storage.");
+          document.getElementById("todoList").innerHTML =
+            '<div class="empty-state"><span class="empty-state-icon">⚡</span><span class="empty-state-text">Storage error</span></div>';
+        }
+      }
+
+      // Format date for display
+      function formatDate(dateString) {
+        if (!dateString) return "Date unknown";
+        const date = new Date(dateString);
+        const options = {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        };
+        return date.toLocaleDateString("en-US", options);
+      }
+
+      // Format reminder time for display
+      function formatReminderTime(dateString) {
+        if (!dateString) return null;
+        const date = new Date(dateString);
+        const options = {
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        };
+        return date.toLocaleDateString("en-US", options);
+      }
+
+      // Get reminder badge class based on time
+      function getReminderBadgeClass(reminderTime) {
+        if (!reminderTime) return "";
+        const now = new Date();
+        const reminder = new Date(reminderTime);
+        const diffMs = reminder - now;
+        const diffMins = diffMs / (1000 * 60);
+
+        if (diffMs < 0) return "past";
+        if (diffMins <= 30) return "soon";
+        return "";
+      }
+
+      // Render todos to the DOM
+      function renderTodos(todosToRender) {
+        const todoList = document.getElementById("todoList");
+
+        if (todosToRender.length === 0) {
+          todoList.innerHTML = `
+            <div class="empty-state">
+              <svg class="empty-state-icon" viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" fill="none" stroke-width="1">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+              <span class="empty-state-text">No items on today's agenda</span>
+              <span class="empty-state-hint">Type above and press Enter to add one</span>
+            </div>`;
+          return;
+        }
+
+        // Sort: pinned first, then by date
+        const sortedTodos = [...todosToRender].sort((a, b) => {
+          const aPinned = pinnedTodos.has(a.id);
+          const bPinned = pinnedTodos.has(b.id);
+          if (aPinned && !bPinned) return -1;
+          if (!aPinned && bPinned) return 1;
+          return 0;
+        });
+
+        todoList.innerHTML = sortedTodos
+          .map((todo, index) => {
+            const isCompleted = completedTodos.has(todo.id);
+            const isPinned = pinnedTodos.has(todo.id);
+            const reminderBadge = todo.reminderTime
+              ? `<span class="reminder-badge ${getReminderBadgeClass(
+                  todo.reminderTime
+                )}">${formatReminderTime(todo.reminderTime)}</span>`
+              : "";
+            return `
+              <div class="todo-item${isCompleted ? " completed" : ""}${
+              isPinned ? " pinned" : ""
+            }" data-id="${todo.id}" data-reminder="${
+              todo.reminderTime || ""
+            }" style="animation-delay: ${0.05 + index * 0.05}s">
+                <div class="todo-checkbox${
+                  isCompleted ? " checked" : ""
+                }" onclick="toggleComplete(${
+              todo.id
+            })" role="checkbox" aria-checked="${isCompleted}" tabindex="0">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12l5 5L19 7"/>
+                  </svg>
+                </div>
+                <div class="todo-content">
+                  <span class="todo-text">${escapeHtml(
+                    todo.text
+                  )}${reminderBadge}</span>
+                  <span class="todo-meta">Filed ${formatDate(
+                    todo.createdAt
+                  )}</span>
+                </div>
+                <div class="todo-actions">
+                  <button class="pin-btn${
+                    isPinned ? " pinned" : ""
+                  }" onclick="togglePin(${todo.id})" aria-label="${
+              isPinned ? "Unpin" : "Pin"
+            } task">
+                    <svg viewBox="0 0 24 24"><path d="M16 4V9c0 1-1 2-3 3l-1 1v4l-4-4H4l4-4c1-2 2-3 3-3h5z M15 15l4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <button class="delete-btn" onclick="deleteTodo(${
+                    todo.id
+                  })" aria-label="Delete task">
+                    <svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6" stroke-linecap="round"/></svg>
+                  </button>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      // Toggle pin (local only)
+      function togglePin(id) {
+        if (pinnedTodos.has(id)) {
+          pinnedTodos.delete(id);
+          showToast("Task unpinned");
+        } else {
+          pinnedTodos.add(id);
+          showToast("Task pinned");
+        }
+        localStorage.setItem("pinnedTodos", JSON.stringify([...pinnedTodos]));
+        renderTodos(todos);
+      }
+
+      // Toggle todo completion (local only)
+      function toggleComplete(id) {
+        if (completedTodos.has(id)) {
+          completedTodos.delete(id);
+        } else {
+          completedTodos.add(id);
+          showToast("Task completed! ✓");
+        }
+        localStorage.setItem(
+          "completedTodos",
+          JSON.stringify([...completedTodos])
+        );
+        renderTodos(todos);
+        updateTodoCount();
+      }
+
+      // Add a new todo
+      async function addTodo(event) {
+        event.preventDefault();
+
+        const input = document.getElementById("todoInput");
+        const reminderInput = document.getElementById("reminderInput");
+        const btn = document.getElementById("addBtn");
+        const text = input.value.trim();
+        const reminderTime = reminderInput.value
+          ? new Date(reminderInput.value).toISOString()
+          : null;
+
+        if (!text) {
+          input.style.animation = "shake 0.4s ease";
+          setTimeout(() => (input.style.animation = ""), 400);
+          return;
+        }
+
+        btn.classList.add("loading");
+
+        try {
+          // Create new todo and save to localStorage
+          const newTodo = {
+            id: nextId++,
+            text: text,
+            completed: false,
+            createdAt: new Date().toISOString(),
+            reminderTime: reminderTime
+          };
+          
+          todos.push(newTodo);
+          saveTodos();
+
+          input.value = "";
+          reminderInput.value = "";
+          clearReminder();
+          showToast(
+            reminderTime
+              ? "Task filed with reminder ⏰"
+              : "Task filed successfully"
+          );
+          fetchTodos();
+        } catch (error) {
+          console.error("Error adding todo:", error);
+          showToast("Couldn't add task. Try again.", true);
+        } finally {
+          btn.classList.remove("loading");
+        }
+      }
+
+      // Delete a todo with animation
+      async function deleteTodo(id) {
+        const item = document.querySelector(`[data-id="${id}"]`);
+        if (item) {
+          item.classList.add("removing");
+          await new Promise((r) => setTimeout(r, 300));
+        }
+
+        try {
+          // Remove from localStorage
+          todos = todos.filter(todo => todo.id !== id);
+          saveTodos();
+
+          completedTodos.delete(id);
+          localStorage.setItem(
+            "completedTodos",
+            JSON.stringify([...completedTodos])
+          );
+          showToast("Task removed");
+          fetchTodos();
+        } catch (error) {
+          console.error("Error deleting todo:", error);
+          showToast("Couldn't remove task. Try again.", true);
+          if (item) item.classList.remove("removing");
+        }
+      }
+
+      // Helper functions
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      function updateStatus(message, connected) {
+        const statusBar = document.getElementById("statusBar");
+        statusBar.innerHTML = `<span class="status-dot"></span><span>${message}</span>`;
+        if (connected) {
+          statusBar.classList.add("connected");
+        } else {
+          statusBar.classList.remove("connected");
+        }
+      }
+
+      function showError(message) {
+        const errorEl = document.getElementById("errorMessage");
+        document.getElementById("errorText").textContent = message;
+        errorEl.style.display = "flex";
+      }
+
+      function hideError() {
+        document.getElementById("errorMessage").style.display = "none";
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", (e) => {
+        // Focus input with '/' key
+        if (
+          e.key === "/" &&
+          document.activeElement !== document.getElementById("todoInput")
+        ) {
+          e.preventDefault();
+          document.getElementById("todoInput").focus();
+        }
+        // Allow Enter on checkbox
+        if (e.key === "Enter" && e.target.classList.contains("todo-checkbox")) {
+          e.target.click();
+        }
+      });
+
+      // Reminder notification system
+      let notifiedReminders = new Set(
+        JSON.parse(localStorage.getItem("notifiedReminders") || "[]")
+      );
+
+      // Request notification permission
+      function requestNotificationPermission() {
+        if ("Notification" in window && Notification.permission === "default") {
+          Notification.requestPermission();
+        }
+      }
+
+      // Check for due reminders
+      function checkReminders() {
+        const now = new Date();
+        todos.forEach((todo) => {
+          if (
+            todo.reminderTime &&
+            !completedTodos.has(todo.id) &&
+            !notifiedReminders.has(todo.id)
+          ) {
+            const reminderDate = new Date(todo.reminderTime);
+            const diffMs = reminderDate - now;
+
+            // Notify if reminder is due (within 1 minute window)
+            if (diffMs <= 60000 && diffMs > -60000) {
+              showReminderNotification(todo);
+              notifiedReminders.add(todo.id);
+              localStorage.setItem(
+                "notifiedReminders",
+                JSON.stringify([...notifiedReminders])
+              );
+            }
+          }
+        });
+        // Re-render to update badge styles
+        renderTodos(todos);
+      }
+
+      // Show reminder notification
+      function showReminderNotification(todo) {
+        // Show toast
+        showToast(`⏰ Reminder: ${todo.text}`);
+
+        // Show browser notification if permitted
+        if ("Notification" in window && Notification.permission === "granted") {
+          new Notification("TODO Reminder", {
+            body: todo.text,
+            icon: "📋",
+            tag: `reminder-${todo.id}`,
+          });
+        }
+      }
+
+      // Check reminders every 30 seconds
+      setInterval(checkReminders, 30000);
+
+      // Initial load
+      setDefaultReminderTime();
+      requestNotificationPermission();
+      fetchTodos();
+    </script>
+  </body>
+</html>

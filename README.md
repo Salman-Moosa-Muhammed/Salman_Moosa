@@ -39,4 +39,4 @@ Salman_Moosa/
 
 ## 📝 License
 
-© 2025 Salman Moosa. All rights reserved.
+© 2026 Salman Moosa. All rights reserved.

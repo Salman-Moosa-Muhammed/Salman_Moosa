@@ -54,6 +54,8 @@
       type="font/otf"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
     <link href="css/normalize.css" rel="stylesheet" />
     <link href="css/locomotive-scroll.css" rel="stylesheet" />
@@ -303,25 +305,18 @@
                   </span>
                 </a>
               </li>
-              <li class="btn btn-link btn-menu">
-                <div
-                  class="btn-click magnetic"
-                  data-strength="20"
-                  data-strength-text="10"
-                >
-                  <div class="btn-text">
-                    <span class="btn-text-inner">Menu</span>
-                  </div>
-                </div>
-              </li>
             </ul>
           </div>
           <div class="container medium once-in">
             <div class="row">
               <div class="flex-col">
                 <h1 class="about-hero-title">
-                  <span class="title-line">Building scalable</span>
-                  <span class="title-line">cloud infrastructure</span>
+                  <span class="title-line title-line-1"
+                    >Building <span class="hover-scale">scalable</span></span
+                  >
+                  <span class="title-line title-line-2"
+                    >cloud infrastructure</span
+                  >
                 </h1>
               </div>
             </div>
@@ -408,6 +403,7 @@
                       alt="Salman Moosa - DevOps Engineer"
                       class="profile-img"
                       loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>
@@ -1031,6 +1027,8 @@
                         alt="Salman Moosa"
                         width="80"
                         height="80"
+                        loading="lazy"
+                        decoding="async"
                       />
                       Let's work </span
                     ><span>together</span>
@@ -1117,13 +1115,16 @@
         </div>
       </div>
     </main>
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/js.cookie.min.js"></script>
-    <script src="js/gsap.min.js"></script>
-    <script src="js/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.10.3"></script>
-    <script src="js/lazyload.min.js"></script>
-    <script src="js/locomotive-scroll.min.js"></script>
+    <script defer src="js/jquery-3.5.1.min.js"></script>
+    <script defer src="js/js.cookie.min.js"></script>
+    <script defer src="js/gsap.min.js"></script>
+    <script defer src="js/ScrollTrigger.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@barba/core@2.10.3"
+    ></script>
+    <script defer src="js/lazyload.min.js"></script>
+    <script defer src="js/locomotive-scroll.min.js"></script>
     <script defer src="js/index-new.js"></script>
   </body>
 </html>
