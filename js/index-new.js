@@ -18,8 +18,8 @@ function markAsVisited() {
   Cookies.set("visited", "true", { expires: 1 }); // Expires in 1 day
 }
 
-// Fallback: Force complete loading if it takes too long (5 seconds)
-// Average load time is ~2-3 seconds, so 5 seconds is a safe timeout
+// Fallback: Force complete loading if it takes too long (3 seconds)
+// Animation is now ~1.5-2 seconds, so 3 seconds is a safe timeout
 let loadingTimeout = null;
 
 function initLoadingFallback() {
@@ -27,25 +27,25 @@ function initLoadingFallback() {
   if (loadingTimeout) {
     clearTimeout(loadingTimeout);
   }
-  loadingTimeout = setTimeout(function() {
+  loadingTimeout = setTimeout(function () {
     if (!loadingComplete) {
       forceCompleteLoading();
     }
-  }, 5000);
+  }, 3000);
 }
 
 // Force loading screen to complete immediately
 function forceCompleteLoading() {
   if (loadingComplete) return;
   loadingComplete = true;
-  
+
   gsap.set(".loading-screen", { top: "-100%" });
   gsap.set(".loading-screen .rounded-div-wrap.bottom", { height: "0vh" });
   gsap.set(".loading-screen .rounded-div-wrap.top", { height: "0vh" });
   gsap.set(".loading-words", { opacity: 0 });
   gsap.set("main .once-in", { y: "0vh", clearProps: "transform" });
   gsap.set("html", { cursor: "auto" });
-  
+
   if (scroll) scroll.start();
   markAsVisited();
 }
@@ -172,46 +172,47 @@ function initLoaderHome() {
     });
   }
 
+  // Don't show loading cursor - keep it normal
   tl.set("html", {
-    cursor: "wait",
+    cursor: "auto",
   });
 
   tl.call(function () {
     if (scroll) scroll.stop();
   });
 
-  // Fade in the loading words container
+  // Fade in the loading words container - faster
   tl.to(".loading-words", {
-    duration: 0.6,
+    duration: 0.4,
     opacity: 1,
     y: -50,
     ease: "Power3.easeOut",
-    delay: 0.3,
+    delay: 0.15,
   });
 
-  // Show "Hello" text with a clean fade
+  // Show "Hello" text with a clean fade - faster
   tl.to(
     ".loading-words .home-active-first",
     {
-      duration: 0.8,
+      duration: 0.5,
       opacity: 1,
       ease: "Power2.easeOut",
     },
-    "-=0.3"
+    "-=0.2"
   );
 
-  // Wait a moment, then fade out "Hello"
+  // Wait a moment, then fade out "Hello" - shorter delay
   tl.to(".loading-words .home-active-first", {
-    duration: 0.5,
+    duration: 0.3,
     opacity: 0,
     y: -15,
     ease: "Power2.easeIn",
-    delay: 0.4,
+    delay: 0.2,
   });
 
-  // Transition loading screen away
+  // Transition loading screen away - faster
   tl.to(".loading-screen", {
-    duration: 0.8,
+    duration: 0.6,
     top: "-100%",
     ease: "Power4.easeInOut",
   });
@@ -219,7 +220,7 @@ function initLoaderHome() {
   tl.to(
     ".loading-screen .rounded-div-wrap.bottom",
     {
-      duration: 1,
+      duration: 0.6,
       height: "0vh",
       ease: "Power4.easeInOut",
     },
@@ -229,7 +230,7 @@ function initLoaderHome() {
   tl.to(
     ".loading-words",
     {
-      duration: 0.3,
+      duration: 0.2,
       opacity: 0,
       ease: "linear",
     },
@@ -244,17 +245,17 @@ function initLoaderHome() {
     height: "0vh",
   });
 
-  // Animate in main content
+  // Animate in main content - faster
   tl.to(
     "main .once-in",
     {
-      duration: 1.2,
+      duration: 0.9,
       y: "0vh",
-      stagger: 0.05,
+      stagger: 0.04,
       ease: "Expo.easeOut",
       clearProps: true,
     },
-    "-=0.6"
+    "-=0.5"
   );
 
   tl.set(
@@ -383,7 +384,7 @@ function pageTransitionIn() {
   // Reset loading state for new transition and start fallback timer
   loadingComplete = false;
   initLoadingFallback();
-  
+
   var tl = gsap.timeline();
 
   tl.call(function () {
@@ -1296,7 +1297,7 @@ function initScrollLetters() {
     const tl = gsap.timeline({
         repeat: -1,
         onReverseComplete() {
-          this.totalTime(0);
+          this.totalTime(this.rawTime() + this.duration() * 100);
         },
       }),
       elements = gsap.utils.toArray(targets),

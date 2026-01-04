@@ -412,6 +412,13 @@ p a {
   width: 100%;
 }
 
+/* Full viewport overlay for mobile Safari compatibility */
+.overlay.fixed-nav-back {
+  position: fixed;
+  height: 100vh;
+  height: 100dvh;
+}
+
 img.overlay,
 video.overlay {
   object-fit: cover;

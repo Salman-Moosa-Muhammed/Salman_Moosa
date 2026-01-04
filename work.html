@@ -47,13 +47,6 @@
     <meta name="google" content="notranslate" />
     <link rel="canonical" href="work.html" />
 
-    <link
-      rel="preload"
-      as="font"
-      href="assets/fonts/NeueMontreal-Regular.otf"
-      type="font/otf"
-      crossorigin="anonymous"
-    />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
@@ -79,30 +72,37 @@
       /* Collapsible sections wrapper - stacks when expanded */
       .sections-grid {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: calc(var(--gap-padding) * 0.75);
         padding: 0 var(--container-padding) calc(var(--section-padding) * 0.35);
         background: var(--color-white);
       }
 
       .sections-grid .collapsible-section {
-        flex: 1 1 calc(50% - calc(var(--gap-padding) * 0.375));
-        min-width: 300px;
-        transition: flex-basis 0.4s ease-in-out, opacity 0.3s ease-in-out;
+        width: 100%;
+        transition: all 0.4s ease-in-out;
       }
 
-      /* When a section is expanded, it takes full width */
-      .sections-grid .collapsible-section.expanded {
-        flex: 1 1 100%;
+      @media screen and (min-width: 901px) {
+        .sections-grid {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .sections-grid .collapsible-section {
+          flex: 1 1 calc(50% - calc(var(--gap-padding) * 0.375));
+          min-width: 300px;
+        }
+
+        /* When a section is expanded, it takes full width */
+        .sections-grid .collapsible-section.expanded {
+          flex: 1 1 100%;
+        }
       }
 
       @media screen and (max-width: 900px) {
         .sections-grid {
           gap: calc(var(--gap-padding) * 0.5);
-        }
-
-        .sections-grid .collapsible-section {
-          flex: 1 1 100%;
         }
       }
 
@@ -181,6 +181,9 @@
       .collapsible-toggle svg {
         width: 18px;
         height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        flex-shrink: 0;
         transition: transform 0.3s ease-in-out;
       }
 
@@ -233,97 +236,86 @@
         background: var(--color-white);
       }
 
-      /* Projects Section */
+      /* Projects Section - Minimal List Design */
       .projects-section .container {
         max-width: none;
       }
 
       .projects-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1em;
-        margin-bottom: 1em;
+        display: flex;
+        flex-direction: column;
       }
 
       .project-card {
         display: flex;
-        flex-direction: row;
-        background: var(--color-lightgray);
-        border-radius: 0.75em;
-        overflow: hidden;
+        align-items: flex-start;
+        gap: 1.5em;
+        padding: 1.75em 0;
+        border-bottom: 1px solid var(--color-border);
         text-decoration: none;
         color: var(--color-dark);
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-          box-shadow 0.35s ease, background 0.2s ease;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .project-card:first-child {
+        padding-top: 0.5em;
+      }
+
+      .project-card:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
       }
 
       .project-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-        background: #e4e4e6;
+        padding-left: 0.5em;
       }
 
-      .project-card-image {
-        width: 140px;
-        min-height: 120px;
-        flex-shrink: 0;
-        background: linear-gradient(135deg, #1c1d20 0%, #2d2e33 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .project-card-image::before {
-        content: "";
-        position: absolute;
-        width: 80%;
-        height: 80%;
-        background: linear-gradient(135deg, #455ce9 0%, #334bd3 100%);
-        border-radius: 50%;
-        opacity: 0.2;
-        filter: blur(25px);
-        transition: opacity 0.3s ease;
-      }
-
-      .project-card:hover .project-card-image::before {
-        opacity: 0.4;
-      }
-
-      .project-card-image-text {
+      .project-card-number {
         font-family: "Neue Montreal", sans-serif;
-        font-size: 1em;
+        font-size: 0.85em;
         font-weight: 450;
-        color: var(--color-white);
-        text-align: center;
-        z-index: 1;
-        line-height: 1.2;
-        padding: 0.75em;
-      }
-
-      .project-card-image-text span {
-        display: block;
-        font-size: 0.7em;
-        font-weight: 300;
-        opacity: 0.6;
-        margin-top: 0.25em;
+        color: var(--color-blue);
+        min-width: 2em;
+        padding-top: 0.15em;
       }
 
       .project-card-content {
-        padding: 1.25em 1.5em;
         flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        gap: 0.5em;
+      }
+
+      .project-card-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1em;
+        flex-wrap: wrap;
       }
 
       .project-card-title {
         font-family: "Neue Montreal", sans-serif;
-        font-size: 1.25em;
+        font-size: clamp(1.35em, 2.5vw, 1.75em);
         font-weight: 450;
-        margin: 0 0 0.35em;
+        margin: 0;
         line-height: 1.2;
+        transition: color 0.3s ease;
+      }
+
+      .project-card:hover .project-card-title {
+        color: var(--color-blue);
+      }
+
+      .project-card-type {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: 0.9em;
+        font-weight: 450;
+        opacity: 0.5;
+        padding: 0.2em 0.75em;
+        border: 1px solid var(--color-border);
+        border-radius: 2em;
       }
 
       .project-card-description {
@@ -331,35 +323,42 @@
         font-size: 1em;
         font-weight: 450;
         opacity: 0.6;
-        margin: 0 0 0.75em;
+        margin: 0;
         line-height: 1.6;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        max-width: 600px;
+      }
+
+      .project-card-footer {
+        display: flex;
+        align-items: center;
+        gap: 1.5em;
+        margin-top: 0.5em;
+        flex-wrap: wrap;
       }
 
       .project-card-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.4em;
+        gap: 0.35em;
       }
 
       .project-card-tag {
         font-family: "Neue Montreal", sans-serif;
-        background: var(--color-white);
-        padding: 0.3em 0.65em;
-        border-radius: 0.5em;
-        font-size: 0.8em;
+        color: var(--color-dark);
+        font-size: 0.85em;
         font-weight: 450;
-        opacity: 0.75;
+        opacity: 0.5;
+      }
+
+      .project-card-tag:not(:last-child)::after {
+        content: "·";
+        margin-left: 0.35em;
       }
 
       .project-card-links {
         display: flex;
-        gap: 1em;
-        margin-top: 0.75em;
+        gap: 1.25em;
+        margin-left: auto;
       }
 
       .project-card-link {
@@ -368,18 +367,19 @@
         align-items: center;
         gap: 0.35em;
         font-size: 0.95em;
-        color: var(--color-blue);
+        color: var(--color-dark);
         font-weight: 450;
-        transition: gap 0.25s ease;
+        opacity: 0.6;
+        transition: opacity 0.25s ease, gap 0.25s ease;
         margin: 0;
       }
 
-      .project-card-link.secondary {
-        color: var(--color-dark);
-        opacity: 0.6;
+      .project-card-link:hover {
+        opacity: 1;
       }
 
-      .project-card-link.secondary:hover {
+      .project-card-link.primary {
+        color: var(--color-blue);
         opacity: 1;
       }
 
@@ -388,8 +388,71 @@
       }
 
       .project-card-link svg {
-        width: 1em;
-        height: 1em;
+        width: 0.9em;
+        height: 0.9em;
+        max-width: 0.9em;
+        max-height: 0.9em;
+        flex-shrink: 0;
+      }
+
+      .project-card-arrow {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        align-self: center;
+      }
+
+      .project-card:hover .project-card-arrow {
+        background: var(--color-dark);
+        border-color: var(--color-dark);
+        transform: scale(1.05);
+      }
+
+      .project-card-arrow svg {
+        width: 18px;
+        height: 18px;
+        transition: stroke 0.3s ease, transform 0.3s ease;
+      }
+
+      .project-card:hover .project-card-arrow svg {
+        stroke: var(--color-white);
+        transform: rotate(-45deg);
+      }
+
+      @media screen and (max-width: 720px) {
+        .project-card {
+          flex-direction: column;
+          gap: 0.75em;
+          padding: 1.5em 0;
+        }
+
+        .project-card:hover {
+          padding-left: 0;
+        }
+
+        .project-card-number {
+          display: none;
+        }
+
+        .project-card-footer {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.75em;
+        }
+
+        .project-card-links {
+          margin-left: 0;
+        }
+
+        .project-card-arrow {
+          display: none;
+        }
       }
 
       /* More projects coming - refined */
@@ -418,6 +481,8 @@
       .projects-coming-soon-icon svg {
         width: 20px;
         height: 20px;
+        max-width: 20px;
+        max-height: 20px;
         opacity: 0.5;
       }
 
@@ -482,6 +547,340 @@
       .skill-tag:hover {
         background: var(--color-dark);
         color: var(--color-white);
+      }
+
+      /* Make project cards clickable */
+      .project-card {
+        cursor: pointer;
+      }
+
+      /* Project Modal Styles - Minimal Design */
+      .project-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        background: rgba(28, 29, 32, 0.95);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .project-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .project-modal {
+        position: relative;
+        max-width: 720px;
+        margin: 8vh auto;
+        background: var(--color-white);
+        border-radius: 1.25em;
+        overflow: hidden;
+        transform: translateY(40px);
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.4s ease;
+      }
+
+      .project-modal-overlay.active .project-modal {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .project-modal-close {
+        position: absolute;
+        top: 1.25em;
+        right: 1.25em;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .project-modal-close:hover {
+        transform: scale(1.1) rotate(90deg);
+        background: var(--color-dark);
+        border-color: var(--color-dark);
+      }
+
+      .project-modal-close svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--color-dark);
+        transition: stroke 0.3s ease;
+      }
+
+      .project-modal-close:hover svg {
+        stroke: var(--color-white);
+      }
+
+      .project-modal-header {
+        padding: 3em 2.5em 2em;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .project-modal-number {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: 0.85em;
+        font-weight: 450;
+        color: var(--color-blue);
+        margin-bottom: 0.75em;
+        display: block;
+      }
+
+      .project-modal-title {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: clamp(1.75em, 4vw, 2.5em);
+        font-weight: 450;
+        color: var(--color-dark);
+        margin: 0 0 0.35em;
+        line-height: 1.15;
+      }
+
+      .project-modal-subtitle {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: 1em;
+        color: var(--color-dark);
+        opacity: 0.5;
+        margin: 0;
+      }
+
+      .project-modal-body {
+        padding: 2em 2.5em 2.5em;
+      }
+
+      .project-modal-section {
+        margin-bottom: 2em;
+        padding-bottom: 2em;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .project-modal-section:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .project-modal-section-title {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: 0.8em;
+        font-weight: 450;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-dark);
+        opacity: 0.4;
+        margin: 0 0 1.25em;
+        display: flex;
+        align-items: center;
+        gap: 0.75em;
+      }
+
+      .project-modal-section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--color-border);
+      }
+
+      .project-modal-section-number {
+        color: var(--color-blue);
+        opacity: 1;
+      }
+
+      .project-modal-text {
+        font-family: "Neue Montreal", sans-serif;
+        font-size: 1.05em;
+        line-height: 1.7;
+        color: var(--color-dark);
+        margin: 0;
+        opacity: 0.8;
+      }
+
+      .project-modal-text + .project-modal-text {
+        margin-top: 1em;
+      }
+
+      /* Philosophy/Principles Table - Minimal */
+      .project-modal-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .project-modal-table tr {
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .project-modal-table tr:last-child {
+        border-bottom: none;
+      }
+
+      .project-modal-table td {
+        font-family: "Neue Montreal", sans-serif;
+        padding: 0.9em 0;
+        vertical-align: top;
+        font-size: 0.95em;
+      }
+
+      .project-modal-table td:first-child {
+        font-weight: 450;
+        width: 120px;
+        padding-right: 1.5em;
+        color: var(--color-dark);
+      }
+
+      .project-modal-table td:last-child {
+        opacity: 0.6;
+      }
+
+      /* Tech Stack - Inline dots */
+      .project-modal-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+      }
+
+      .project-modal-stack-item {
+        font-family: "Neue Montreal", sans-serif;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        padding: 0.45em 0.9em;
+        border-radius: 2em;
+        font-size: 0.9em;
+        font-weight: 450;
+        transition: all 0.25s ease;
+      }
+
+      .project-modal-stack-item:hover {
+        background: var(--color-dark);
+        border-color: var(--color-dark);
+        color: var(--color-white);
+      }
+
+      /* Code Block - Clean */
+      .project-modal-code {
+        background: var(--color-dark);
+        border-radius: 0.75em;
+        padding: 1.25em 1.5em;
+        overflow-x: auto;
+        margin: 0.5em 0;
+      }
+
+      .project-modal-code code {
+        font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
+        font-size: 0.85em;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.7;
+        white-space: pre;
+      }
+
+      /* Modal Links - Refined */
+      .project-modal-links {
+        display: flex;
+        gap: 0.75em;
+        margin-top: 1.5em;
+        flex-wrap: wrap;
+      }
+
+      .project-modal-link {
+        font-family: "Neue Montreal", sans-serif;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5em;
+        padding: 0.7em 1.25em;
+        border-radius: 2em;
+        font-size: 0.95em;
+        font-weight: 450;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .project-modal-link.primary {
+        background: var(--color-dark);
+        color: var(--color-white);
+      }
+
+      .project-modal-link.primary:hover {
+        background: var(--color-blue);
+        transform: translateY(-2px);
+      }
+
+      .project-modal-link.secondary {
+        background: transparent;
+        color: var(--color-dark);
+        border: 1px solid var(--color-border);
+      }
+
+      .project-modal-link.secondary:hover {
+        background: var(--color-dark);
+        border-color: var(--color-dark);
+        color: var(--color-white);
+        transform: translateY(-2px);
+      }
+
+      .project-modal-link svg {
+        width: 0.9em;
+        height: 0.9em;
+        transition: transform 0.25s ease;
+      }
+
+      .project-modal-link:hover svg {
+        transform: translate(2px, -2px);
+      }
+
+      @media screen and (max-width: 600px) {
+        .project-modal {
+          margin: 0;
+          min-height: 100%;
+          min-height: 100dvh;
+          border-radius: 0;
+        }
+
+        .project-modal-header {
+          padding: 4em 1.5em 1.5em;
+        }
+
+        .project-modal-body {
+          padding: 1.5em;
+        }
+
+        .project-modal-close {
+          top: 1em;
+          right: 1em;
+        }
+
+        .project-modal-table td:first-child {
+          width: 90px;
+          font-size: 0.9em;
+        }
+
+        .project-modal-section {
+          margin-bottom: 1.5em;
+          padding-bottom: 1.5em;
+        }
+
+        .project-modal-links {
+          flex-direction: column;
+        }
+
+        .project-modal-link {
+          justify-content: center;
+        }
       }
 
       /* Mobile adjustments for project cards */
@@ -774,6 +1173,8 @@
                 <div class="collapsible-toggle">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -875,6 +1276,8 @@
                 <div class="collapsible-toggle">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -891,104 +1294,295 @@
                 <div class="collapsible-content-inner">
                   <div class="collapsible-inner">
                     <div class="projects-grid">
-                      <div class="project-card">
-                        <div class="project-card-image">
-                          <div class="project-card-image-text">
-                            Daily Todo
-                            <span>Full-Stack App</span>
-                          </div>
-                        </div>
+                      <!-- Project 1: Daily Todo -->
+                      <div
+                        class="project-card"
+                        onclick="openProjectModal('daily-todo')"
+                      >
+                        <span class="project-card-number">01</span>
                         <div class="project-card-content">
-                          <h3 class="project-card-title">The Daily Todo</h3>
+                          <div class="project-card-header">
+                            <h3 class="project-card-title">The Daily Todo</h3>
+                            <span class="project-card-type"
+                              >Full-Stack App</span
+                            >
+                          </div>
                           <p class="project-card-description">
                             A vintage newspaper-inspired task management app
-                            featuring containerized microservices architecture,
-                            automated CI/CD pipeline, RESTful API, and elegant
-                            light/dark theme toggle with reminder system.
+                            with containerized microservices, automated CI/CD
+                            pipeline, and elegant theming.
                           </p>
-                          <div class="project-card-tags">
-                            <span class="project-card-tag">Docker</span>
-                            <span class="project-card-tag">Docker Compose</span>
-                            <span class="project-card-tag">Node.js</span>
-                            <span class="project-card-tag">Express.js</span>
-                            <span class="project-card-tag">Nginx</span>
-                            <span class="project-card-tag">GitHub Actions</span>
-                            <span class="project-card-tag">CI/CD</span>
-                            <span class="project-card-tag">REST API</span>
-                          </div>
-                          <div class="project-card-links">
-                            <a
-                              href="https://github.com/Salman-Moosa/mytodo"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="project-card-link"
-                              onclick="event.stopPropagation()"
-                            >
-                              GitHub
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                          <div class="project-card-footer">
+                            <div class="project-card-tags">
+                              <span class="project-card-tag">Docker</span>
+                              <span class="project-card-tag">Node.js</span>
+                              <span class="project-card-tag">Express</span>
+                              <span class="project-card-tag">MongoDB</span>
+                              <span class="project-card-tag"
+                                >GitHub Actions</span
                               >
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                              </svg>
-                            </a>
-                            <a
-                              href="my-projects/daily-todo/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="project-card-link secondary"
-                              onclick="event.stopPropagation()"
-                            >
-                              Live Demo
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                            </div>
+                            <div class="project-card-links">
+                              <a
+                                href="https://github.com/Salman-Moosa/mytodo"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-card-link primary"
+                                onclick="event.stopPropagation()"
                               >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="2" y1="12" x2="22" y2="12"></line>
-                                <path
-                                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                                ></path>
-                              </svg>
-                            </a>
+                                GitHub
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                                  <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                              </a>
+                              <a
+                                href="my-projects/daily-todo/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-card-link"
+                                onclick="event.stopPropagation()"
+                              >
+                                Live Demo
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <circle cx="12" cy="12" r="10"></circle>
+                                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                                  <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                                  ></path>
+                                </svg>
+                              </a>
+                            </div>
                           </div>
                         </div>
+                        <div class="project-card-arrow">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                          </svg>
+                        </div>
                       </div>
-                    </div>
 
-                    <!-- More Projects Coming -->
-                    <div class="projects-coming-soon">
-                      <div class="projects-coming-soon-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path
-                            d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-                          ></path>
-                        </svg>
+                      <!-- Project 2: Sales Tracker -->
+                      <div
+                        class="project-card"
+                        onclick="openProjectModal('sales-tracker')"
+                      >
+                        <span class="project-card-number">02</span>
+                        <div class="project-card-content">
+                          <div class="project-card-header">
+                            <h3 class="project-card-title">Sales Tracker</h3>
+                            <span class="project-card-type">Mobile App</span>
+                          </div>
+                          <p class="project-card-description">
+                            Offline-first field sales tracking app. No cloud, no
+                            accounts, no subscriptions. Track inventory, manage
+                            ledgers, generate invoices.
+                          </p>
+                          <div class="project-card-footer">
+                            <div class="project-card-tags">
+                              <span class="project-card-tag">React 19</span>
+                              <span class="project-card-tag">Vite</span>
+                              <span class="project-card-tag">IndexedDB</span>
+                              <span class="project-card-tag">Capacitor</span>
+                              <span class="project-card-tag">Tailwind</span>
+                            </div>
+                            <div class="project-card-links">
+                              <a
+                                href="https://github.com/Salman-Moosa/sales-tracker"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-card-link primary"
+                                onclick="event.stopPropagation()"
+                              >
+                                GitHub
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                                  <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                              </a>
+                              <a
+                                href="https://sales-tracker-sandy.vercel.app/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-card-link"
+                                onclick="event.stopPropagation()"
+                              >
+                                Live Demo
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <circle cx="12" cy="12" r="10"></circle>
+                                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                                  <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                                  ></path>
+                                </svg>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="project-card-arrow">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                          </svg>
+                        </div>
                       </div>
-                      <div class="projects-coming-soon-text">
-                        <h4>Building in Progress</h4>
-                        <p>
-                          New projects with Kubernetes & Terraform coming soon.
-                        </p>
+
+                      <!-- Project 3: Life Calendar Wallpaper Generator -->
+                      <div
+                        class="project-card"
+                        onclick="openProjectModal('wallpaper-generator')"
+                      >
+                        <span class="project-card-number">03</span>
+                        <div class="project-card-content">
+                          <div class="project-card-header">
+                            <h3 class="project-card-title">
+                              Life Calendar Wallpaper
+                            </h3>
+                            <span class="project-card-type">Web App</span>
+                          </div>
+                          <p class="project-card-description">
+                            Generate personalized "life in weeks" calendar
+                            wallpapers with customizable colors, Apple Shortcuts
+                            integration, and edge-optimized image generation.
+                          </p>
+                          <div class="project-card-footer">
+                            <div class="project-card-tags">
+                              <span class="project-card-tag">Next.js 14</span>
+                              <span class="project-card-tag">TypeScript</span>
+                              <span class="project-card-tag">Supabase</span>
+                              <span class="project-card-tag">NextAuth</span>
+                              <span class="project-card-tag">Vercel OG</span>
+                            </div>
+                            <div class="project-card-links">
+                              <a
+                                href="https://github.com/Salman-Moosa/wallpaper-generator"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-card-link primary"
+                                onclick="event.stopPropagation()"
+                              >
+                                GitHub
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                                  <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                              </a>
+                              <a
+                                href="https://yearwallpaper.vercel.app/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-card-link"
+                                onclick="event.stopPropagation()"
+                              >
+                                Live Demo
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <circle cx="12" cy="12" r="10"></circle>
+                                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                                  <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                                  ></path>
+                                </svg>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="project-card-arrow">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1154,6 +1748,492 @@
         </div>
       </div>
     </main>
+
+    <!-- Project Modals -->
+    <!-- Daily Todo Modal -->
+    <div
+      class="project-modal-overlay"
+      id="modal-daily-todo"
+      onclick="closeProjectModal(event)"
+    >
+      <div class="project-modal" onclick="event.stopPropagation()">
+        <button
+          class="project-modal-close"
+          onclick="closeProjectModal(event, true)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="project-modal-header">
+          <span class="project-modal-number">Project 01</span>
+          <h1 class="project-modal-title">The Daily Todo</h1>
+          <p class="project-modal-subtitle">Full-Stack Task Management App</p>
+        </div>
+        <div class="project-modal-body">
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">01</span> Context
+            </h3>
+            <p class="project-modal-text">
+              The real flex is the CI/CD pipeline. I wanted that green checkmark
+              so badly I built an entire app around it. Every push, every
+              automated deployment, every successful build felt like I was
+              finally doing software "the right way." The newspaper design was
+              just window dressing for the main event: watching GitHub Actions
+              work its magic. The features reminders, dark mode, themes were
+              necessary, but the pipeline was the love story. I needed a reason
+              to containerize something real. Now I have a todo list that
+              deploys itself.
+            </p>
+          </div>
+
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">02</span> Architecture
+            </h3>
+            <table class="project-modal-table">
+              <tr>
+                <td>Frontend</td>
+                <td>Static HTML/CSS/JS served via Nginx</td>
+              </tr>
+              <tr>
+                <td>Backend</td>
+                <td>Node.js + Express.js REST API</td>
+              </tr>
+              <tr>
+                <td>Database</td>
+                <td>MongoDB with persistent volumes</td>
+              </tr>
+              <tr>
+                <td>Containers</td>
+                <td>Docker Compose orchestration</td>
+              </tr>
+              <tr>
+                <td>CI/CD</td>
+                <td>GitHub Actions automated pipeline</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">03</span> Tech Stack
+            </h3>
+            <div class="project-modal-stack">
+              <span class="project-modal-stack-item">Docker</span>
+              <span class="project-modal-stack-item">Docker Compose</span>
+              <span class="project-modal-stack-item">Node.js</span>
+              <span class="project-modal-stack-item">Express.js</span>
+              <span class="project-modal-stack-item">MongoDB</span>
+              <span class="project-modal-stack-item">Nginx</span>
+              <span class="project-modal-stack-item">GitHub Actions</span>
+            </div>
+          </div>
+
+          <div class="project-modal-section">
+            <div class="project-modal-links">
+              <a
+                href="https://github.com/Salman-Moosa/mytodo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-modal-link primary"
+              >
+                View on GitHub
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <a
+                href="my-projects/daily-todo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-modal-link secondary"
+              >
+                Live Demo
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sales Tracker Modal -->
+    <div
+      class="project-modal-overlay"
+      id="modal-sales-tracker"
+      onclick="closeProjectModal(event)"
+    >
+      <div class="project-modal" onclick="event.stopPropagation()">
+        <button
+          class="project-modal-close"
+          onclick="closeProjectModal(event, true)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="project-modal-header">
+          <span class="project-modal-number">Project 02</span>
+          <h1 class="project-modal-title">Sales Tracker</h1>
+          <p class="project-modal-subtitle">Offline-First Field Sales App</p>
+        </div>
+        <div class="project-modal-body">
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">01</span> Context
+            </h3>
+            <p class="project-modal-text">
+              This one's personal. My dad works at small distribution business,
+              and I used to help out when I can. Watching him scroll through
+              spreadsheets on his phone at dinner squinting at rows, trying to
+              remember who still owed money felt wrong. I downloaded every sales
+              app I could find. They were either bloated with features he'd
+              never touch or locked behind subscriptions that made no sense for
+              a one-man operation. So I built what I wished existed something
+              that answers three questions fast Who owes me? What did I sell?
+              What's my report? No cloud, no login, no monthly rent. Just a tool
+              that respects your data and your time. The offline-first choice?
+              Because all data stored on device no sync needed. This is software
+              for real work, not venture scale fantasies.
+            </p>
+          </div>
+
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">02</span> Philosophy
+            </h3>
+            <table class="project-modal-table">
+              <tr>
+                <td>No Cloud</td>
+                <td>
+                  Your data lives on your device. No sync issues. No leaks.
+                </td>
+              </tr>
+              <tr>
+                <td>No Accounts</td>
+                <td>Download and start. No sign-up walls.</td>
+              </tr>
+              <tr>
+                <td>No Subs</td>
+                <td>You own the tool. No monthly rent.</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">03</span> Capabilities
+            </h3>
+            <table class="project-modal-table">
+              <tr>
+                <td>Offline First</td>
+                <td>Zero latency. Works in the middle of nowhere.</td>
+              </tr>
+              <tr>
+                <td>Inventory</td>
+                <td>Auto deducts stock. Warns you when low.</td>
+              </tr>
+              <tr>
+                <td>Ledger</td>
+                <td>Tracks outstanding balances per shop automatically.</td>
+              </tr>
+              <tr>
+                <td>Invoicing</td>
+                <td>Generates clean, professional PDF invoices.</td>
+              </tr>
+              <tr>
+                <td>Payments</td>
+                <td>QR code generation for instant UPI payments.</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">04</span> Tech Stack
+            </h3>
+            <div class="project-modal-stack">
+              <span class="project-modal-stack-item">React 19</span>
+              <span class="project-modal-stack-item">Vite</span>
+              <span class="project-modal-stack-item">Dexie.js (IndexedDB)</span>
+              <span class="project-modal-stack-item">Capacitor</span>
+              <span class="project-modal-stack-item">Tailwind CSS</span>
+            </div>
+          </div>
+
+          <div class="project-modal-section">
+            <div class="project-modal-links">
+              <a
+                href="https://github.com/Salman-Moosa/sales-tracker"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-modal-link primary"
+              >
+                View on GitHub
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <a
+                href="https://sales-tracker-sandy.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-modal-link secondary"
+              >
+                Live Demo
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wallpaper Generator Modal -->
+    <div
+      class="project-modal-overlay"
+      id="modal-wallpaper-generator"
+      onclick="closeProjectModal(event)"
+    >
+      <div class="project-modal" onclick="event.stopPropagation()">
+        <button
+          class="project-modal-close"
+          onclick="closeProjectModal(event, true)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="project-modal-header">
+          <span class="project-modal-number">Project 03</span>
+          <h1 class="project-modal-title">Life Calendar Wallpaper</h1>
+          <p class="project-modal-subtitle">Daily Year Calendar Generator</p>
+        </div>
+        <div class="project-modal-body">
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">01</span> Overview
+            </h3>
+            <p class="project-modal-text">
+              I found thelifecalendar.com one night during an existential
+              crisis, as one does. The concept hit me like a truck your entire
+              life as a grid of weeks. Terrifying and motivating at the same
+              time.But the wallpaper it generated? It fought with my clock. No
+              padding options, no color tweaks, no way to make it mine.So I
+              built my own. One that lets me add padding for my lock screen
+              widgets, pick colors that match my vibe, and updates itself
+              automatically via a shortcut it ran every day. The auth and rate
+              limiting came later turns out other people wanted their own
+              existential dread wallpapers too. It's weirdly motivating to see
+              your life as a grid.Suddenly every week is a binary view.
+            </p>
+          </div>
+
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">02</span> Key Features
+            </h3>
+            <table class="project-modal-table">
+              <tr>
+                <td>Life Calendar</td>
+                <td>
+                  Visualize your life in weeks as a beautiful grid wallpaper
+                </td>
+              </tr>
+              <tr>
+                <td>Daily Updates</td>
+                <td>Use Apple Shortcuts to auto-update lock screen daily</td>
+              </tr>
+              <tr>
+                <td>Customization</td>
+                <td>Colors, dimensions, labels — make it yours</td>
+              </tr>
+              <tr>
+                <td>Auth</td>
+                <td>Google login via NextAuth for higher rate limits</td>
+              </tr>
+              <tr>
+                <td>Edge Optimized</td>
+                <td>Fast image generation via @vercel/og</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">03</span> Tech Stack
+            </h3>
+            <div class="project-modal-stack">
+              <span class="project-modal-stack-item">Next.js 14</span>
+              <span class="project-modal-stack-item">React 18</span>
+              <span class="project-modal-stack-item">TypeScript</span>
+              <span class="project-modal-stack-item">Supabase</span>
+              <span class="project-modal-stack-item">NextAuth</span>
+              <span class="project-modal-stack-item">@vercel/og</span>
+              <span class="project-modal-stack-item">Upstash Redis</span>
+            </div>
+          </div>
+
+          <div class="project-modal-section">
+            <h3 class="project-modal-section-title">
+              <span class="project-modal-section-number">04</span> Architecture
+            </h3>
+            <table class="project-modal-table">
+              <tr>
+                <td>Frontend</td>
+                <td>Next.js App Router with React components</td>
+              </tr>
+              <tr>
+                <td>Auth</td>
+                <td>NextAuth with Google OAuth provider</td>
+              </tr>
+              <tr>
+                <td>Database</td>
+                <td>Supabase (PostgreSQL) for users & generations</td>
+              </tr>
+              <tr>
+                <td>Rate Limiting</td>
+                <td>Per-user and per-IP limits stored in Supabase</td>
+              </tr>
+              <tr>
+                <td>Image Gen</td>
+                <td>Edge-optimized OG image generation</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="project-modal-section">
+            <div class="project-modal-links">
+              <a
+                href="https://github.com/Salman-Moosa/wallpaper-generator"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-modal-link primary"
+              >
+                View on GitHub
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <a
+                href="https://yearwallpaper.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-modal-link secondary"
+              >
+                Live Demo
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script defer src="js/jquery-3.5.1.min.js"></script>
     <script defer src="js/js.cookie.min.js"></script>
     <script defer src="js/gsap.min.js"></script>
@@ -1189,6 +2269,49 @@
         setTimeout(updateScroll, 400);
         setTimeout(updateScroll, 600);
       }
+
+      // Project Modal Functions
+      let currentOpenModal = null;
+
+      function openProjectModal(projectId) {
+        const modal = document.getElementById("modal-" + projectId);
+        if (modal) {
+          currentOpenModal = modal;
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden";
+
+          // Stop locomotive scroll if active
+          if (typeof scroll !== "undefined" && scroll && scroll.stop) {
+            scroll.stop();
+          }
+        }
+      }
+
+      function closeProjectModal(event, forceClose) {
+        if (
+          forceClose ||
+          (event && event.target.classList.contains("project-modal-overlay"))
+        ) {
+          if (currentOpenModal) {
+            currentOpenModal.classList.remove("active");
+            document.body.style.overflow = "";
+
+            // Restart locomotive scroll if active
+            if (typeof scroll !== "undefined" && scroll && scroll.start) {
+              scroll.start();
+            }
+
+            currentOpenModal = null;
+          }
+        }
+      }
+
+      // Close modal on Escape key
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && currentOpenModal) {
+          closeProjectModal(null, true);
+        }
+      });
     </script>
   </body>
 </html>
